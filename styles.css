@@ -20,12 +20,15 @@ body { font-family: Poppins, sans-serif; color: var(--fg); -webkit-font-smoothin
 em { font-style: normal; }
 
 /* ---------- Visor ---------- */
-#deck { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 24px 0; }
+/* Una slide por pantalla: cada .screen ocupa el viewport y la slide se escala para llenarlo */
+html:not(:has(body.print)) { scroll-snap-type: y mandatory; background: #000; }
+body:not(.print) { background: #000; }
+.screen { width: 100vw; height: 100vh; display: grid; place-items: center; scroll-snap-align: start; overflow: hidden; }
 .frame { width: calc(1920px * var(--scale)); height: calc(1080px * var(--scale)); position: relative; }
 .frame > .slide { transform: scale(var(--scale)); transform-origin: 0 0; position: absolute; top: 0; left: 0; }
-.frame .num { position: absolute; left: -36px; top: 0; color: #666; font: 500 13px Poppins; }
+.frame .num { position: absolute; right: 12px; bottom: 12px; z-index: 2; padding: 2px 8px; border-radius: 6px; background: rgba(0,0,0,.55); color: #8a8a8a; font: 500 12px/18px Poppins; letter-spacing: .04em; pointer-events: none; }
 body.print, body.print html { background: #000; }
-body.print #deck { padding: 0; gap: 0; }
+body.print .screen { width: auto; height: auto; display: block; }
 body.print .frame { --scale: 1 !important; }
 body.print .frame .num { display: none; }
 @page { size: 1920px 1080px; margin: 0; }
@@ -122,6 +125,12 @@ body.print .frame .num { display: none; }
 .cover-title .it { font-size: 141px; line-height: 0; }
 .cover-foot { position: absolute; top: 985px; width: 784px; height: 16px; font: 500 18px/16px Poppins; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
 .abs { position: absolute; display: block; }
+
+/* ---------- Video ---------- */
+.vid { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; object-fit: cover; background: #000; }
+.replay { position: absolute; right: 60px; bottom: 48px; z-index: 3; padding: 14px 24px; border: 0; border-radius: 10px; background: rgba(255,255,255,.12); color: #fff; font: 500 22px Poppins; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.replay.show { opacity: 1; pointer-events: auto; }
+.replay:hover { background: rgba(255,255,255,.2); }
 
 /* ---------- Cierre ---------- */
 .closing-text { position: absolute; left: 0; top: 910px; width: 1920px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }

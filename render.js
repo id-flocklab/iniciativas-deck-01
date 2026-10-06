@@ -103,21 +103,64 @@ const T = {
       </div>`);
   },
 
+  // Video explicativo a pantalla completa. En el PDF se muestra el cuadro final (poster).
+  video: (s) => document.body.classList.contains('print')
+    ? `<img class="vid" src="assets/video/${s.src}-poster.jpg" alt="">`
+    : `<video class="vid" src="out/video/${s.src}.mp4" poster="assets/video/${s.src}-poster.jpg" muted playsinline preload="auto"></video>
+       <button class="replay" type="button">↻ Ver de nuevo</button>`,
+
   closing: (s) => `
     <img class="abs" src="assets/logo-close.png" style="left:872.5px;top:458px;width:175px;height:164px">
     <div class="closing-text"><div class="it">${rich(s.kicker).replace(/<\/?em[^>]*>/g, '')}</div><div class="b">${rich(s.title)}</div></div>`,
 };
 
+const total = () => window.SLIDES.length;
+
 function renderDeck() {
   const deck = document.getElementById('deck');
-  const scale = Math.min(1, (window.innerWidth - 96) / 1920);
   deck.innerHTML = window.SLIDES.map((s, i) => `
-    <div class="frame" style="--scale:${scale}" id="s${i + 1}">
-      <div class="num">${i + 1}</div>
-      <section class="slide theme-${s.theme || 'deck'}">${T[s.type](s)}</section>
+    <div class="screen">
+      <div class="frame" id="s${i + 1}">
+        <div class="num">${i + 1} / ${total()}</div>
+        <section class="slide theme-${s.theme || 'deck'}">${T[s.type](s)}</section>
+      </div>
     </div>`).join('');
+  fit();
+  setupVideos();
 }
+
+// Los videos arrancan desde el principio cada vez que se entra a su slide y se pausan al salir
+function setupVideos() {
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+    const v = e.target;
+    if (e.isIntersecting) { v.currentTime = 0; v.play().catch(() => {}); } else v.pause();
+  }), { threshold: 0.6 });
+  document.querySelectorAll('video.vid').forEach((v) => {
+    io.observe(v);
+    const btn = v.parentElement.querySelector('.replay');
+    v.addEventListener('ended', () => btn.classList.add('show'));
+    v.addEventListener('play', () => btn.classList.remove('show'));
+    btn.onclick = () => { v.currentTime = 0; v.play(); };
+  });
+}
+
+// Escala cada slide para ocupar la pantalla completa (sin bordes de sobra, sin tope de tamaño)
+function fit() {
+  if (document.body.classList.contains('print')) return;
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  document.querySelectorAll('.frame').forEach((f) => f.style.setProperty('--scale', scale));
+}
+
+// Navegación con teclado: una slide por vez
+const current = () => Math.round(window.scrollY / window.innerHeight);
+const go = (i) => window.scrollTo({ top: Math.max(0, Math.min(total() - 1, i)) * window.innerHeight, behavior: 'smooth' });
+window.addEventListener('keydown', (e) => {
+  if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(current() + 1); }
+  if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(current() - 1); }
+  if (e.key === 'Home') { e.preventDefault(); go(0); }
+  if (e.key === 'End') { e.preventDefault(); go(total() - 1); }
+});
 
 if (new URLSearchParams(location.search).has('print')) document.body.classList.add('print');
 renderDeck();
-window.addEventListener('resize', () => { if (!document.body.classList.contains('print')) renderDeck(); });
+window.addEventListener('resize', fit);

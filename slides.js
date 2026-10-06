@@ -1,7 +1,8 @@
 // Contenido del deck. Cada slide = { type, theme, ...datos }.
 // Texto entre *asteriscos* = Newsreader Light Italic (el acento en cursiva).
 // themes: deck (violeta) · i1 (magenta) · i2 (naranja) · i3 (verde)
-// types: cover · section · list · cards · steps · clients · quote · gantt · closing
+// types: cover · section · video · list · cards · steps · clients · quote · gantt · closing
+// video: { src: 'cv' } → reproduce out/video/cv.mp4 al entrar a la slide (en el PDF va el cuadro final)
 
 const I1 = 'INICIATIVA 01 · MEDIMOS TIEMPOS DE CICLO DE TAREAS REPETITIVAS CON COMPUTER VISION';
 const I2 = 'INICIATIVA 02 · GENERAMOS ESCENARIOS DE CAPACITACIÓN INMERSIVA CON IA Y UNREAL ENGINE';
@@ -35,6 +36,7 @@ window.SLIDES = [
     title: 'Control de eficiencia en *tareas repetitivas*',
     foot: 'COMPUTER VISION · AUTOMATIZACIÓN · MEDICIÓN DE TIEMPOS',
   },
+  { type: 'video', theme: 'i1', src: 'cv' },
   {
     type: 'quote', theme: 'i1',
     kicker: I1,
@@ -129,6 +131,7 @@ window.SLIDES = [
     title: 'Capacitación *inmersiva con IA*',
     foot: 'EXPERIENCIAS INMERSIVAS · PRODUCTO · UNREAL ENGINE',
   },
+  { type: 'video', theme: 'i2', src: 'vr' },
   {
     type: 'quote', theme: 'i2',
     kicker: I2,
@@ -225,6 +228,7 @@ window.SLIDES = [
     title: 'Learning basado en video: *multimodal en Trainly*',
     foot: 'AGENTES · PRODUCTO',
   },
+  { type: 'video', theme: 'i3', src: 'ra' },
   {
     type: 'quote', theme: 'i3',
     kicker: I3,

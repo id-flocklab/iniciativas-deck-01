@@ -6,7 +6,7 @@ import { basename, extname, join, normalize } from 'node:path';
 
 const ROOT = new URL('.', import.meta.url).pathname;
 const PORT = Number(process.env.PORT) || 5173;
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.pdf': 'application/pdf' };
+const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.svg': 'image/svg+xml', '.pdf': 'application/pdf', '.mp4': 'video/mp4', '.jpg': 'image/jpeg', '.json': 'application/json' };
 const clients = new Set();
 
 const RELOAD = `<script>new EventSource('/__reload').onmessage=()=>{sessionStorage.y=scrollY;location.reload()};addEventListener('load',()=>{if(sessionStorage.y)scrollTo(0,+sessionStorage.y)})</script>`;
@@ -38,7 +38,16 @@ createServer(async (req, res) => {
     if (!(await stat(file)).isFile()) throw 0;
     let body = await readFile(file);
     if (extname(file) === '.html') body = body.toString().replace('</body>', RELOAD + '</body>');
-    res.writeHead(200, { 'Content-Type': TYPES[extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
+    const type = TYPES[extname(file)] || 'application/octet-stream';
+    // Range requests: los navegadores los usan para reproducir video
+    const range = /bytes=(\d*)-(\d*)/.exec(req.headers.range || '');
+    if (range && extname(file) === '.mp4') {
+      const start = Number(range[1] || 0), end = range[2] ? Number(range[2]) : body.length - 1;
+      res.writeHead(206, { 'Content-Type': type, 'Content-Range': `bytes ${start}-${end}/${body.length}`, 'Accept-Ranges': 'bytes', 'Content-Length': end - start + 1 });
+      res.end(body.subarray(start, end + 1));
+      return;
+    }
+    res.writeHead(200, { 'Content-Type': type, 'Cache-Control': 'no-store', 'Accept-Ranges': 'bytes' });
     res.end(body);
   } catch { res.writeHead(404).end('not found'); }
 }).listen(PORT, () => console.log(`Deck en http://localhost:${PORT}`));
