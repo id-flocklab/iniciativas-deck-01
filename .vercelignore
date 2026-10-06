@@ -1,0 +1,9 @@
+reference/
+node_modules/
+assets/raw/
+out/png/
+out/cmp/
+compare.py
+build.mjs
+serve.mjs
+video/render.mjs

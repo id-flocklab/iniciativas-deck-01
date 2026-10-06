@@ -9,7 +9,7 @@ Requiere Node 18+ y Google Chrome instalado (se usa para renderizar el PDF y los
 ```bash
 npm install
 npm run dev        # http://localhost:5173 — se recarga solo al editar
-npm run pdf        # out/IyD-Flock-Labs-2026.pdf
+npm run pdf        # out/IyD-Flock-Labs-2026.pdf (npm run render: solo PNGs por slide)
 npm run video:cv   # out/video/cv.mp4 (también video:vr y video:ra)
 ```
 
@@ -20,6 +20,10 @@ npm run video:cv   # out/video/cv.mp4 (también video:vr y video:ra)
 - **Estilos:** [`styles.css`](styles.css), con las medidas tomadas del Figma original. Temas por iniciativa: `deck` (violeta), `i1` (magenta), `i2` (naranja), `i3` (verde).
 - **Videos:** `video/cv.html`, `video/vr.html`, `video/ra.html` (base compartida en `video/common.*`). Se pueden ver en el navegador en `/video/<nombre>.html`.
 
+## Publicación (Vercel)
+
+El sitio es estático: no necesita build. [`vercel.json`](vercel.json) publica la carpeta tal cual, y los scripts que usan Chrome (`render`, `pdf`, `video:*`) se corren solo en local.
+
 ## Fidelidad con el diseño original
 
-`reference/` tiene las capturas de las 28 slides originales de Figma. `npm run build && npm run compare` renderiza el deck y genera comparaciones en `out/cmp/`.
+`reference/` tiene las capturas de las 28 slides originales de Figma. `npm run render && npm run compare` renderiza el deck y genera comparaciones en `out/cmp/`.

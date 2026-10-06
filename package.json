@@ -5,14 +5,14 @@
   "description": "Presentación de iniciativas de I+D · Flock Labs 2026 (HTML + export a PDF y videos explicativos)",
   "scripts": {
     "dev": "node serve.mjs",
-    "build": "node build.mjs",
+    "render": "node build.mjs",
     "pdf": "node build.mjs pdf",
     "compare": "python3 compare.py",
     "video:cv": "node video/render.mjs cv",
     "video:vr": "node video/render.mjs vr",
     "video:ra": "node video/render.mjs ra"
   },
-  "dependencies": {
+  "devDependencies": {
     "puppeteer-core": "^25.12.0"
   }
 }
