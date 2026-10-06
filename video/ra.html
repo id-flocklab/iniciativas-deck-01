@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Iniciativa 03 · Video explicativo</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,300&family=Poppins:wght@400;500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  :root { --accent: #affc5a; --sep: url(../assets/sep-green.png); }
+  .arm-f { transform-origin: 292px 208px; animation: armf 1.6s ease-in-out infinite; }
+  .arm-b { transform-origin: 262px 210px; animation: armb 1.6s ease-in-out infinite; }
+  @keyframes armf { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(5deg); } }
+  @keyframes armb { 0%, 100% { transform: rotate(4deg); } 50% { transform: rotate(-5deg); } }
+  .wheel { transform-box: fill-box; transform-origin: center; animation: spin 3.2s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .worker-dim { --dim: 999s; }
+
+  /* Escena 1: papeles */
+  .docs { position: relative; height: 330px; }
+  .sheet { position: absolute; width: 250px; height: 300px; border-radius: 10px; background: #e9e9e9; padding: 22px; color: #111; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+  .sheet b { font: 600 15px Poppins; }
+  .sheet i { display: block; height: 7px; border-radius: 4px; background: #c4c4c4; margin-top: 11px; }
+  .stamp { position: absolute; padding: 6px 12px; border: 3px solid #ff5a5a; border-radius: 8px; color: #ff5a5a; font: 700 18px Poppins; letter-spacing: .06em; transform: rotate(-10deg); }
+  .docs-txt { font: 400 30px/38px Poppins; margin-top: 18px; }
+  .docs-txt small { display: block; margin-top: 10px; font: 400 22px Poppins; color: var(--muted); }
+
+  /* Escena 2: grabación */
+  .rec { left: 530px; top: 40px; display: flex; gap: 12px; align-items: center; padding: 10px 18px; border-radius: 10px; background: #111; border: 1px solid #2a2a2a; font: 600 20px Poppins; }
+  .rec .dotr { width: 14px; height: 14px; border-radius: 99px; background: #ff3b3b; animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: .2; } }
+  .wave { left: 530px; top: 104px; display: flex; gap: 6px; align-items: center; height: 60px; }
+  .wave i { width: 7px; height: 100%; border-radius: 4px; background: var(--accent); transform-origin: center; animation: wv .9s ease-in-out infinite; }
+  @keyframes wv { 0%, 100% { transform: scaleY(.2); } 50% { transform: scaleY(1); } }
+  .bubble { left: 530px; top: 186px; max-width: 320px; padding: 18px 22px; border-radius: 14px 14px 14px 4px; background: #fff; color: #111; font: 500 22px/28px Poppins; }
+
+  /* Escena 3: pipeline */
+  .strip { left: 60px; top: 420px; display: grid; grid-template-columns: repeat(2, 170px); gap: 14px; }
+  .frame { height: 110px; border-radius: 10px; background: linear-gradient(160deg, #2b2b2b, #161616); position: relative; overflow: hidden; }
+  .frame::before { content: ''; position: absolute; left: 50%; top: 22px; width: 26px; height: 26px; margin-left: -13px; border-radius: 99px; background: #444; box-shadow: 0 34px 0 6px #3a3a3a; }
+  .frame span { position: absolute; left: 8px; bottom: 6px; font: 600 13px Poppins; color: #bbb; }
+  .ai { left: 470px; top: 480px; width: 150px; height: 150px; border-radius: 28px; background: #111; border: 2px solid var(--accent); display: grid; place-items: center; text-align: center; font: 600 20px/24px Poppins; box-shadow: 0 0 40px rgba(175,252,90,.25); }
+  .flow { height: 4px; background: var(--accent); transform-origin: left; animation: growx .5s ease var(--a) both, out .5s ease var(--b) forwards; }
+  .course { padding: 36px 40px; }
+  .course h3 { font: 500 34px/40px Poppins; letter-spacing: -.02em; margin-bottom: 24px; }
+  .course .stp { display: flex; gap: 18px; align-items: center; padding: 14px 0; border-top: 1px solid #262626; font: 400 26px Poppins; }
+  .course .stp b { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,.08); display: grid; place-items: center; font: 600 20px Poppins; flex: none; }
+  .tags { display: flex; gap: 12px; margin-top: 22px; }
+  .tag { padding: 8px 14px; border-radius: 8px; background: rgba(255,255,255,.08); font: 500 18px Poppins; color: #ddd; }
+  .ok { position: absolute; right: 30px; top: -22px; padding: 10px 18px; border-radius: 10px; background: var(--accent); color: #000; font: 700 20px Poppins; }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="abs kicker t" style="--a:.2s">INICIATIVA 03 · CAPACITACIÓN DESDE EL TRABAJO REAL</div>
+  <div class="abs logo t" style="--a:.2s" id="logo"></div>
+
+  <div class="abs headline t" style="--a:.5s;--b:5.2s">Hoy, el saber operativo <span class="it">queda en pocas personas.</span></div>
+  <div class="abs sub t" style="--a:1s;--b:5.2s">Documentar una tarea lleva semanas y se desactualiza rápido.</div>
+  <div class="abs headline t" style="--a:5.7s;--b:10.6s">Con gafas de RA, <span class="it">el experto solo trabaja.</span></div>
+  <div class="abs sub t" style="--a:6.1s;--b:10.6s">Tiene las manos ocupadas: las gafas graban y escuchan mientras explica.</div>
+  <div class="abs headline t" style="--a:11.1s;--b:16.6s">La IA arma <span class="it">el borrador del curso.</span></div>
+  <div class="abs sub t" style="--a:11.5s;--b:16.6s">Un experto lo revisa y lo publica en Trainly.</div>
+  <div class="abs headline t" style="--a:17.1s">Capacitación desde <span class="it">el trabajo real.</span></div>
+
+  <!-- Operario en una válvula (escenas 1-2) -->
+  <div class="abs scene f" style="--a:.6s;--b:10.6s">
+    <svg class="abs" style="left:0;top:0" width="760" height="640" viewBox="0 0 760 640" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="470" y="60" width="28" height="560" rx="8" fill="#333"/>
+      <rect x="470" y="430" width="290" height="28" rx="8" fill="#333"/>
+      <rect x="458" y="300" width="52" height="64" rx="10" fill="#444"/>
+      <g class="wheel"><circle cx="452" cy="332" r="44" stroke="#8a8a8a" stroke-width="9"/><line x1="408" y1="332" x2="496" y2="332" stroke="#8a8a8a" stroke-width="7"/><line x1="452" y1="288" x2="452" y2="376" stroke="#8a8a8a" stroke-width="7"/></g>
+      <g id="worker"></g>
+      <g class="p" style="--a:6.0s" id="glasses"></g>
+    </svg>
+    <div class="abs rec t" style="--a:6.6s"><span class="dotr"></span>REC</div>
+    <div class="abs wave f" style="--a:7.0s" id="wave"></div>
+    <div class="abs bubble t" style="--a:7.6s">“Primero cierro la válvula principal y verifico la presión…”</div>
+  </div>
+
+  <!-- Escena 1: papeles -->
+  <div class="abs panel t" style="--a:1.6s;--b:5.2s">
+    <div class="docs">
+      <div class="sheet" style="left:0;top:20px;transform:rotate(-6deg)"><b>Procedimiento v1</b><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i><i style="width:60%"></i></div>
+      <div class="sheet" style="left:150px;top:0;transform:rotate(3deg)"><b>Procedimiento v2</b><i style="width:85%"></i><i style="width:75%"></i><i style="width:65%"></i><i style="width:80%"></i></div>
+      <div class="stamp p" style="--a:3.2s;left:200px;top:150px">DESACTUALIZADO</div>
+    </div>
+    <div class="docs-txt">Lo que sabe el experto <br>no llega al resto del equipo.<small>Observar, redactar y editar consume días de trabajo.</small></div>
+  </div>
+
+  <!-- Escena 2: beneficios -->
+  <div class="abs panel rows" style="top:380px">
+    <div class="row t" style="--a:7.2s;--b:10.6s"><span class="dot"></span>Manos libres para trabajar</div>
+    <div class="row t" style="--a:7.9s;--b:10.6s"><span class="dot"></span>Graba video y voz del experto</div>
+    <div class="row t" style="--a:8.6s;--b:10.6s"><span class="dot"></span>No interrumpe la tarea</div>
+  </div>
+
+  <!-- Escena 3: video → IA → curso -->
+  <div class="abs strip">
+    <div class="frame t" style="--a:11.3s;--b:16.6s"><span>00:12</span></div>
+    <div class="frame t" style="--a:11.5s;--b:16.6s"><span>00:48</span></div>
+    <div class="frame t" style="--a:11.7s;--b:16.6s"><span>01:30</span></div>
+    <div class="frame t" style="--a:11.9s;--b:16.6s"><span>02:05</span></div>
+  </div>
+  <div class="abs flow" style="--a:12.3s;--b:16.6s;left:428px;top:553px;width:40px"></div>
+  <div class="abs ai p" style="--a:12.5s;--b:16.6s">IA <br>multimodal</div>
+  <div class="abs flow" style="--a:13.0s;--b:16.6s;left:624px;top:553px;width:330px"></div>
+  <div class="abs panel card course t" style="--a:13.1s;--b:16.6s;top:350px">
+    <div class="ok p" style="--a:15.4s">✓ Validado por experto</div>
+    <h3>Cierre de válvula principal</h3>
+    <div class="stp t" style="--a:13.6s"><b>1</b>Cerrar la válvula principal</div>
+    <div class="stp t" style="--a:14.0s"><b>2</b>Verificar que la presión baje a cero</div>
+    <div class="stp t" style="--a:14.4s"><b>3</b>Colocar el bloqueo y la tarjeta</div>
+    <div class="tags"><span class="tag t" style="--a:14.8s">Riesgo: presión</span><span class="tag t" style="--a:15.0s">EPP: guantes</span><span class="tag t" style="--a:15.2s">Herramienta: llave</span></div>
+  </div>
+
+  <!-- Escena 4 -->
+  <div class="abs f" style="--a:17.4s;left:120px;top:400px;width:760px;height:560px;display:grid;place-items:center">
+    <img src="../assets/logo-i3.png" style="width:440px">
+  </div>
+  <div class="abs panel kpis" style="top:330px">
+    <div class="kpi t" style="--a:17.6s"><span class="ribbon"></span><b>Días</b><p>para documentar una tarea, <br>no semanas</p></div>
+    <div class="kpi t" style="--a:18.1s"><span class="ribbon"></span><b>Al día</b><p>se vuelve a grabar cuando <br>cambia el proceso</p></div>
+    <div class="kpi t" style="--a:18.6s"><span class="ribbon"></span><b>Dataset</b><p>video real útil para robótica <br>y otros modelos</p></div>
+  </div>
+
+  <div class="abs sep"></div>
+</div>
+
+<script src="common.js"></script>
+<script>
+  document.getElementById('logo').innerHTML = LOGO_SVG;
+  const w = workerSVG({ glasses: true });
+  // separar las gafas para animarlas aparte
+  const tmp = document.createElementNS('http://www.w3.org/2000/svg', 'g'); tmp.innerHTML = w;
+  const gl = tmp.querySelector('.glasses'); gl.remove();
+  document.getElementById('worker').innerHTML = tmp.innerHTML;
+  document.getElementById('glasses').appendChild(gl);
+  document.getElementById('wave').innerHTML = Array.from({ length: 22 }, (_, i) => `<i style="animation-delay:${-(i * 0.13) % 0.9}s"></i>`).join('');
+  setupVideo(22);
+</script>
+</body>
+</html>

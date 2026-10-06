@@ -1,0 +1,55 @@
+/* Base compartida de los videos explicativos (mismo lenguaje visual que el deck) */
+:root { --muted: #a8a8a8; --line: #1a1a1a; --card: rgba(255,255,255,.06); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; }
+body { font-family: Poppins, sans-serif; color: #fff; -webkit-font-smoothing: antialiased; }
+.stage { width: 1920px; height: 1080px; position: relative; overflow: hidden; background: #000; transform-origin: 0 0; }
+.it { font-family: Newsreader, serif; font-style: italic; font-weight: 300; font-size: 1.1em; line-height: 0; }
+.abs { position: absolute; }
+
+/* Línea de tiempo: entradas/salidas con delays (--a entra, --b sale) */
+@keyframes in   { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes out  { to { opacity: 0; } }
+@keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes growx { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes pop  { 0% { opacity: 0; transform: scale(.4); } 70% { opacity: 1; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes drop { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: none; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.5); opacity: .25; } }
+.t { opacity: 0; animation: in .7s cubic-bezier(.2,.7,.2,1) var(--a) both, out .5s ease var(--b, 999s) forwards; }
+.f { opacity: 0; animation: fade .8s ease var(--a) both, out .5s ease var(--b, 999s) forwards; }
+.p { opacity: 0; transform-box: fill-box; transform-origin: center; animation: pop .55s cubic-bezier(.2,.8,.2,1) var(--a) both, out .5s ease var(--b, 999s) forwards; }
+.d { opacity: 0; animation: drop .6s cubic-bezier(.2,.8,.2,1) var(--a) both, out .5s ease var(--b, 999s) forwards; }
+
+/* Header como en el deck */
+.kicker { left: 60px; top: 80px; font: 500 16px/16px Poppins; letter-spacing: .12em; color: var(--muted); }
+.logo { right: 60px; top: 80px; width: 44px; height: 41px; }
+.headline { left: 60px; top: 132px; width: 1800px; font: 500 80px/88px Poppins; letter-spacing: -.03em; }
+.sub { left: 60px; top: 236px; font: 400 32px/36px Poppins; color: var(--muted); }
+
+/* Panel derecho */
+.scene { left: 120px; top: 330px; width: 760px; height: 640px; }
+.panel { left: 980px; top: 360px; width: 820px; }
+.card { background: var(--card); border-radius: 12px; padding: 40px; }
+.rows { display: grid; gap: 20px; }
+.rows .row { display: flex; gap: 24px; align-items: center; padding: 28px 32px; border-radius: 12px; background: var(--card); font: 400 30px/36px Poppins; }
+.rows .dot { width: 14px; height: 14px; border-radius: 99px; background: var(--accent); flex: none; }
+.kpis { display: grid; gap: 20px; }
+.kpi { display: flex; gap: 28px; align-items: center; padding: 32px 36px; border-radius: 12px; background: var(--card); }
+.kpi b { font: 500 56px/60px Poppins; letter-spacing: -.03em; min-width: 250px; }
+.kpi p { font: 400 26px/32px Poppins; color: #ddd; }
+.ribbon { width: 8px; align-self: stretch; border-radius: 99px; background: var(--accent); flex: none; }
+.chk { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: #1f1f1f; color: #000; font: 700 22px Poppins; flex: none; }
+.sep { left: 0; top: 1064px; width: 1920px; height: 16px; background: var(--sep) 0 0 / 100% 100%; }
+
+/* Operario ilustrado (ver workerSVG en common.js) */
+.worker-dim { animation: dim .8s ease var(--dim, 999s) forwards; }
+@keyframes dim { to { opacity: .38; } }
+.skel .bones line, .skel .bones polyline, .skel polyline { stroke: rgba(255,255,255,.92); stroke-width: 3.5; fill: none; }
+.skel .joints circle { fill: var(--accent); stroke: #000; stroke-width: 2.5; }
+
+/* Visor */
+body:not(.render) { display: grid; place-items: center; min-height: 100vh; background: #111; }
+.controls { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; align-items: center; font: 500 14px Poppins; color: #aaa; }
+.controls button { font: inherit; padding: 8px 16px; border-radius: 8px; border: 0; background: #fff; cursor: pointer; }
+body.render .controls { display: none; }

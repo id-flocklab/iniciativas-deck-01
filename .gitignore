@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+
+# Imágenes originales del Figma (no se usan directamente; ~56 MB)
+assets/raw/
+
+# Importaciones temporales y renders intermedios
+_import/
+reference/small/
+out/png/
+out/cmp/
+out/video/*-frames/
+out/video/*-*s.png

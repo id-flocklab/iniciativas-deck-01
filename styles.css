@@ -1,0 +1,129 @@
+/* Valores tomados 1:1 del archivo de Figma (slides 1920x1080). */
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --muted: #a8a8a8;
+  --line: #1a1a1a;
+  --accent: #621d68;
+  --sep: url(assets/sep-purple.png);
+  --sep-top: 1065px;
+  --sep-h: 15px;
+}
+.theme-deck { --accent: #621d68; --sep: url(assets/sep-purple.png); }
+.theme-i1   { --accent: #ec00ff; --sep: url(assets/sep-magenta.png); }
+.theme-i2   { --accent: #f77229; --sep: url(assets/sep-orange.png); --sep-top: 1064px; --sep-h: 16px; }
+.theme-i3   { --accent: #affc5a; --sep: url(assets/sep-green.png);  --sep-top: 1064px; --sep-h: 16px; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #111; }
+body { font-family: Poppins, sans-serif; color: var(--fg); -webkit-font-smoothing: antialiased; }
+em { font-style: normal; }
+
+/* ---------- Visor ---------- */
+#deck { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 24px 0; }
+.frame { width: calc(1920px * var(--scale)); height: calc(1080px * var(--scale)); position: relative; }
+.frame > .slide { transform: scale(var(--scale)); transform-origin: 0 0; position: absolute; top: 0; left: 0; }
+.frame .num { position: absolute; left: -36px; top: 0; color: #666; font: 500 13px Poppins; }
+body.print, body.print html { background: #000; }
+body.print #deck { padding: 0; gap: 0; }
+body.print .frame { --scale: 1 !important; }
+body.print .frame .num { display: none; }
+@page { size: 1920px 1080px; margin: 0; }
+@media print { .frame { break-after: page; } }
+
+/* ---------- Slide ---------- */
+.slide { width: 1920px; height: 1080px; background: var(--bg); position: relative; overflow: hidden; }
+.sep { position: absolute; left: 0; top: var(--sep-top); width: 1920px; height: var(--sep-h); background: var(--sep) 0 0 / 100% 100% no-repeat; }
+
+/* Tipografía */
+.it { font-family: Newsreader, serif; font-style: italic; font-weight: 300; }
+
+/* ---------- Header + body ---------- */
+.body { position: absolute; left: 60px; top: 0; width: 1800px; height: 1025px; padding-top: 80px; display: flex; flex-direction: column; justify-content: space-between; }
+.header { display: flex; flex-direction: column; flex: none; }
+.kicker-row { display: flex; justify-content: space-between; align-items: flex-start; height: 41.2px; }
+.kicker { font: 500 16px/16px Poppins; letter-spacing: .12em; color: var(--muted); }
+.kicker-row svg { width: 44.09px; height: 41.2px; display: block; }
+.titles { display: flex; flex-direction: column; gap: 8px; }
+.h-title { font: 500 80px/80px Poppins; letter-spacing: -.03em; }
+.h-title .it { font-size: 88px; line-height: 0; }
+.h-sub { font: 400 32px/36px Poppins; color: var(--muted); }
+.content { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+.fixed-box { flex: none; }
+.sec-title { font: 500 40px/44px Poppins; letter-spacing: -.02em; }
+
+/* ---------- Filas (Publication Row) ---------- */
+.rows { display: flex; flex-direction: column; }
+.row { display: flex; align-items: center; gap: 24px; padding: 24px; background: #000; box-shadow: inset 0 0 0 1px var(--line); border-radius: 8px; }
+.ribbon { flex: none; width: 8px; height: 56px; border-radius: 999px; background: var(--accent); }
+.row-title { flex: 1 1 0; font: 400 32px/36px Poppins; }
+.row-tag { flex: none; font: 400 16px/20px Poppins; color: var(--muted); }
+
+/* ---------- Grilla de tarjetas ---------- */
+.grid { display: flex; flex-direction: column; gap: 24px; }
+.grid-row { display: flex; gap: 24px; align-items: flex-start; }
+.grid-row > .row { flex: 1 1 0; min-width: 0; }
+.grid-row > .row .step-body { flex: 1 1 0; }
+
+/* ---------- Pasos numerados (Method Step) ---------- */
+.steps { display: flex; flex-direction: column; }
+.step { display: flex; align-items: center; gap: 24px; padding: 24px; background: #000; box-shadow: inset 0 0 0 1px var(--line); border-radius: 8px; }
+.badge { flex: none; width: 64px; height: 64px; border-radius: 999px; background: rgba(255,255,255,.06); display: flex; align-items: center; justify-content: center; font: 500 32px/36px Poppins; letter-spacing: -.02em; }
+.step-body { flex: 1 1 0; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+.step-title { font: 400 32px/36px Poppins; }
+.step-desc { font: 400 16px/20px Poppins; color: var(--muted); }
+.steps.two { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+.steps.two .step { align-items: flex-start; }
+.steps.two .step-title { font-size: 32px; }
+.steps.two .step-desc { font-size: 20px; line-height: 26px; }
+
+/* ---------- Logos de clientes ---------- */
+.logos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.logo-card { height: 200px; padding: 32px; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center; overflow: hidden; color: #000; font: 500 20px Poppins; }
+.logo-card img { width: 100%; height: 100%; object-fit: contain; }
+
+/* ---------- Hipótesis ---------- */
+.quote { padding: 0 64px; }
+.quote-row { display: flex; gap: 32px; align-items: stretch; justify-content: center; }
+.quote-row .ribbon { height: auto; }
+.quote-text { flex: 1 1 0; font: 500 56px/56px Poppins; letter-spacing: -.03em; }
+.quote-text .it { font-size: 64px; line-height: 0; }
+
+/* ---------- Gantt ---------- */
+.note { width: 1600px; font: 400 16px/normal Inter, sans-serif; color: #b3b3b3; }
+.gantt { width: 1800px; flex: none; }
+.g-months { display: flex; height: 32px; align-items: center; }
+.g-months .lbl, .g-weeks .lbl { width: 320px; flex: none; }
+.g-month { width: 700px; flex: none; text-align: center; font: 600 14px/21px Poppins; letter-spacing: .08em; color: var(--muted); }
+.g-weeks { display: flex; height: 40px; padding-bottom: 16px; align-items: center; border-bottom: 1px solid var(--line); }
+.g-week { width: 175px; flex: none; text-align: center; font: 500 12px/18px Poppins; color: var(--muted); }
+.g-body { position: relative; min-height: 360px; padding: 16px 0 4px; }
+.g-lines { position: absolute; left: 320px; top: 0; bottom: 0; width: 1400px; display: flex; justify-content: space-between; }
+.g-lines i { width: 1px; height: 100%; background: var(--line); opacity: .3; }
+.g-rows { position: relative; width: 1800px; display: flex; flex-direction: column; gap: 16px; }
+.g-band { position: absolute; top: 0; bottom: 0; border-radius: 8px; background: rgba(255,255,255,.05); box-shadow: inset 0 0 0 1px #2a2a2a; }
+.g-client { height: auto; padding: 12px 0 16px; align-items: flex-end; }
+.g-client .g-track { height: 56px; }
+.g-band-txt { position: absolute; bottom: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 12px; }
+.g-k { font: 600 14px/21px Poppins; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.g-k.w { color: var(--fg); font-size: 12px; line-height: 18px; }
+.g-row { display: flex; height: 52px; align-items: center; }
+.g-label { width: 320px; flex: none; display: flex; gap: 12px; align-items: center; }
+.g-n { width: 28px; flex: none; font: 600 14px/21px Poppins; color: var(--muted); }
+.g-t { flex: 1; font: 500 15px/normal Poppins; }
+.g-track { position: relative; width: 1400px; height: 52px; }
+.g-bar { position: absolute; top: 14px; height: 24px; border-radius: 12px; background: var(--accent); }
+.g-bar.big { top: 8px; height: 36px; border-radius: 18px; box-shadow: 0 0 16px color-mix(in srgb, var(--accent) 25%, transparent); }
+
+/* ---------- Portadas ---------- */
+.cover-left { position: absolute; top: 0; height: 1080px; padding: 200px 0; display: flex; flex-direction: column; justify-content: center; }
+.cover-kicker { font-size: 90px; line-height: 80px; letter-spacing: -.03em; }
+.cover-title { font: 500 128px/118px Poppins; letter-spacing: -.035em; }
+.cover-title .it { font-size: 141px; line-height: 0; }
+.cover-foot { position: absolute; top: 985px; width: 784px; height: 16px; font: 500 18px/16px Poppins; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.abs { position: absolute; display: block; }
+
+/* ---------- Cierre ---------- */
+.closing-text { position: absolute; left: 0; top: 910px; width: 1920px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.closing-text .it { font-size: 36px; line-height: 32px; letter-spacing: -.01em; white-space: nowrap; }
+.closing-text .b { font: 500 32px/36px Poppins; letter-spacing: -.02em; white-space: nowrap; }

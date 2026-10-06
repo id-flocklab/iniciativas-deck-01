@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Iniciativa 02 · Video explicativo</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,6..72,300&family=Poppins:wght@400;500;600&display=block" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  :root { --accent: #f77229; --sep: url(../assets/sep-orange.png); }
+
+  /* Escena 1: proceso tradicional */
+  .trad { left: 60px; top: 380px; width: 860px; }
+  .trad h4 { font: 500 22px Poppins; color: var(--muted); letter-spacing: .08em; margin-bottom: 28px; }
+  .trad .r { display: flex; align-items: center; height: 64px; }
+  .trad .r span { width: 250px; font: 400 24px Poppins; white-space: nowrap; }
+  .trad .r .track { flex: 1; position: relative; height: 26px; }
+  .trad .r .b { position: absolute; top: 0; height: 26px; border-radius: 13px; background: #3a3a3a; transform-origin: left; animation: growx .7s cubic-bezier(.2,.8,.2,1) var(--a) both; }
+  .trad .total { margin-top: 26px; display: flex; justify-content: flex-end; font: 500 40px Poppins; }
+  .quote { font: 500 44px/52px Poppins; letter-spacing: -.02em; }
+  .quote small { display: block; margin-top: 20px; font: 400 26px/32px Poppins; color: var(--muted); letter-spacing: 0; }
+
+  /* Escena 2-3: documento + escena isométrica */
+  .doc { left: 120px; top: 380px; width: 230px; padding: 24px; border-radius: 12px; background: #f2f2f2; color: #111; }
+  .doc b { display: block; font: 600 16px/20px Poppins; margin-bottom: 14px; }
+  .doc i { display: block; height: 8px; border-radius: 4px; background: #c8c8c8; margin-top: 10px; }
+  .arrow { left: 370px; top: 470px; width: 80px; height: 4px; background: var(--accent); transform-origin: left; animation: growx .5s ease var(--a) both, out .5s ease var(--b) forwards; }
+  .arrow::after { content: ''; position: absolute; right: -4px; top: -8px; border: 10px solid transparent; border-left: 14px solid var(--accent); }
+  .isoscene { left: 290px; top: 300px; width: 690px; height: 740px; }
+  .hz circle.ring { fill: none; stroke: var(--accent); stroke-width: 4; transform-box: fill-box; transform-origin: center; animation: pulse 1.2s ease-in-out infinite; }
+  .hz circle.core { fill: var(--accent); }
+  .vr { left: 150px; top: 380px; }
+  .wire * { fill: none !important; stroke: var(--accent) !important; stroke-width: 1.4px !important; }
+
+  .checklist .row { gap: 22px; }
+  .checklist .chk-on { position: absolute; inset: 0; border-radius: 10px; background: var(--accent); display: grid; place-items: center; color: #000; font: 700 22px Poppins; }
+
+  /* Escena 4: comparación */
+  .cmp { left: 120px; top: 420px; width: 780px; display: grid; gap: 44px; }
+  .cmp .l { display: flex; justify-content: space-between; font: 400 26px Poppins; margin-bottom: 14px; }
+  .cmp .l b { font-weight: 500; }
+  .cmp .bar { height: 40px; border-radius: 20px; transform-origin: left; animation: growx .9s cubic-bezier(.2,.8,.2,1) var(--a) both; }
+  .cmp .note { font: 400 20px Poppins; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="abs kicker t" style="--a:.2s">INICIATIVA 02 · VR CON IA GENERATIVA</div>
+  <div class="abs logo t" style="--a:.2s" id="logo"></div>
+
+  <div class="abs headline t" style="--a:.5s;--b:5.2s">Hoy, crear una experiencia de VR <span class="it">lleva meses.</span></div>
+  <div class="abs sub t" style="--a:1s;--b:5.2s">Modelado 3D, escenas e interacciones, todo hecho a mano.</div>
+  <div class="abs headline t" style="--a:5.7s;--b:10.6s">Con IA generativa <span class="it">armamos la escena…</span></div>
+  <div class="abs sub t" style="--a:6.1s;--b:10.6s">A partir de un procedimiento escrito, la IA genera los objetos y los ubica.</div>
+  <div class="abs headline t" style="--a:11.1s;--b:16.6s">…y el operario <span class="it">practica sin riesgo.</span></div>
+  <div class="abs sub t" style="--a:11.5s;--b:16.6s">Entrena en un escenario realista antes de ir a planta.</div>
+  <div class="abs headline t" style="--a:17.1s">De meses <span class="it">a semanas.</span></div>
+
+  <!-- Escena 1 -->
+  <div class="abs trad t" style="--a:1.2s;--b:5.2s">
+    <h4>PROCESO TRADICIONAL</h4>
+    <div class="r"><span>Modelado 3D</span><div class="track"><div class="b" style="--a:1.6s;left:0;width:34%"></div></div></div>
+    <div class="r"><span>Texturas</span><div class="track"><div class="b" style="--a:2.0s;left:28%;width:22%"></div></div></div>
+    <div class="r"><span>Armado de escena</span><div class="track"><div class="b" style="--a:2.4s;left:46%;width:28%"></div></div></div>
+    <div class="r"><span>Interacciones</span><div class="track"><div class="b" style="--a:2.8s;left:70%;width:22%"></div></div></div>
+    <div class="r"><span>Pruebas</span><div class="track"><div class="b" style="--a:3.2s;left:88%;width:12%"></div></div></div>
+    <div class="total t" style="--a:3.7s">3 a 6 meses</div>
+  </div>
+  <div class="abs panel card t" style="--a:2.2s;--b:5.2s;top:420px">
+    <div class="quote">Muchos clientes <br>nos piden VR.<small>Hoy no tenemos una solución propia para responder a esa demanda.</small></div>
+  </div>
+
+  <!-- Escena 2-3 -->
+  <div class="abs doc t" style="--a:6.3s;--b:10.6s">
+    <b>Procedimiento: inspección de bomba y válvula</b>
+    <i style="width:90%"></i><i style="width:75%"></i><i style="width:84%"></i><i style="width:60%"></i><i style="width:80%"></i><i style="width:70%"></i>
+  </div>
+  <div class="abs arrow" style="--a:6.9s;--b:10.6s"></div>
+  <svg class="abs isoscene f" style="--a:6.0s;--b:16.6s" viewBox="-330 -290 720 772" id="iso"></svg>
+  <svg class="abs vr t" style="--a:11.6s;--b:16.6s" width="150" height="90" viewBox="0 0 150 90"><rect x="6" y="16" width="138" height="60" rx="22" fill="#fff"/><rect x="20" y="28" width="48" height="36" rx="12" fill="#111"/><rect x="82" y="28" width="48" height="36" rx="12" fill="#111"/><path d="M66 76 Q75 62 84 76" fill="#000"/><rect x="0" y="36" width="10" height="20" rx="4" fill="#999"/><rect x="140" y="36" width="10" height="20" rx="4" fill="#999"/></svg>
+
+  <div class="abs panel rows" style="top:380px">
+    <div class="row t" style="--a:7.2s;--b:10.6s"><span class="dot"></span>Lee el procedimiento</div>
+    <div class="row t" style="--a:7.9s;--b:10.6s"><span class="dot"></span>Genera los objetos 3D</div>
+    <div class="row t" style="--a:8.6s;--b:10.6s"><span class="dot"></span>Arma la escena en Unreal</div>
+  </div>
+  <div class="abs panel rows checklist" style="top:380px">
+    <div class="row t" style="--a:11.4s;--b:16.6s"><span class="chk" style="position:relative">·<span class="chk-on p" style="--a:12.6s">✓</span></span>Válvula sin bloqueo</div>
+    <div class="row t" style="--a:11.6s;--b:16.6s"><span class="chk" style="position:relative">·<span class="chk-on p" style="--a:13.8s">✓</span></span>Pérdida en la cañería</div>
+    <div class="row t" style="--a:11.8s;--b:16.6s"><span class="chk" style="position:relative">·<span class="chk-on p" style="--a:15.0s">✓</span></span>Bomba sin protección</div>
+  </div>
+
+  <!-- Escena 4 -->
+  <div class="abs cmp t" style="--a:17.3s">
+    <div><div class="l"><span>Proceso tradicional</span><b>3 a 6 meses</b></div><div class="bar" style="--a:17.6s;background:#3a3a3a;width:100%"></div></div>
+    <div><div class="l"><span>Con IA generativa</span><b>semanas</b></div><div class="bar" style="--a:18.2s;background:var(--accent);width:22%;box-shadow:0 0 24px rgba(247,114,41,.5)"></div></div>
+    <div class="note">El mercado ya habla de escenarios en ~3 semanas: queremos validar cuánto podemos acelerar.</div>
+  </div>
+  <div class="abs panel kpis" style="top:330px">
+    <div class="kpi t" style="--a:18.0s"><span class="ribbon"></span><b>Semanas</b><p>para un escenario completo, <br>no meses</p></div>
+    <div class="kpi t" style="--a:18.5s"><span class="ribbon"></span><b>Reutilizable</b><p>objetos 3D entre <br>proyectos y clientes</p></div>
+    <div class="kpi t" style="--a:19.0s"><span class="ribbon"></span><b>Nueva</b><p>capacidad de VR para <br>clientes industriales</p></div>
+  </div>
+
+  <div class="abs sep"></div>
+</div>
+
+<script src="common.js"></script>
+<script>
+  document.getElementById('logo').innerHTML = LOGO_SVG;
+  // ── Escena isométrica: planta industrial que la IA "genera" (wireframe → sólido) ──
+  const S = 41;
+  const I = (x, y, z) => iso(x, y, z, S);
+  const P = (x, y, z) => I(x, y, z).join(',');
+  const box = (x, y, z, w, d, h, c) => isoBox(x, y, z, w, d, h, c, S);
+  // cilindro vertical (tanque)
+  const cyl = (x, y, r, h, top, side) => {
+    const [cx, cy] = I(x, y, 0), [, ty] = I(x, y, h), rx = r * S * 0.95, ry = r * S * 0.52;
+    let bands = '';
+    for (const k of [0.3, 0.55, 0.8]) { const [, by] = I(x, y, h * k); bands += `<path d="M${cx - rx},${by} A${rx},${ry} 0 0 0 ${cx + rx},${by}" stroke="#2f2f2f" stroke-width="3" fill="none"/>`; }
+    return `<path d="M${cx - rx},${cy} L${cx - rx},${ty} A${rx},${ry} 0 0 1 ${cx + rx},${ty} L${cx + rx},${cy} A${rx},${ry} 0 0 1 ${cx - rx},${cy}Z" fill="${side}"/>
+      <path d="M${cx + rx * .35},${ty + ry * .9} L${cx + rx * .35},${cy + ry * .9}" stroke="rgba(255,255,255,.08)" stroke-width="${rx * .35}"/>
+      ${bands}<ellipse cx="${cx}" cy="${ty}" rx="${rx}" ry="${ry}" fill="${top}"/><ellipse cx="${cx}" cy="${ty}" rx="${rx * .35}" ry="${ry * .35}" fill="#555"/>`;
+  };
+  const line = (a, b, w = 3, c = '#8a8a8a') => `<line x1="${I(...a)[0]}" y1="${I(...a)[1]}" x2="${I(...b)[0]}" y2="${I(...b)[1]}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+  // aparece como wireframe naranja y luego se vuelve sólido
+  const gen = (t, svg) => `<g class="f" style="--a:${t}s;--b:${(t + 1.2).toFixed(2)}s"><g class="wire">${svg}</g></g><g class="f" style="--a:${(t + 0.55).toFixed(2)}s">${svg}</g>`;
+  const label = (t, at, dx, dy, text) => { const [x, y] = I(...at); const lx = x + dx, ly = y + dy, w = text.length * 9.2 + 28;
+    return `<g class="f" style="--a:${t}s;--b:10.6s"><line x1="${x}" y1="${y}" x2="${lx}" y2="${ly}" stroke="#fff" stroke-width="1.5"/><circle cx="${x}" cy="${y}" r="4" fill="#fff"/>
+      <rect x="${dx > 0 ? lx : lx - w}" y="${ly - 17}" width="${w}" height="34" rx="8" fill="#fff"/><text x="${dx > 0 ? lx + 14 : lx - w + 14}" y="${ly + 6}" font-family="Poppins" font-weight="600" font-size="16" fill="#111">${text}</text></g>`; };
+
+  let g = `<defs><pattern id="stripes" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="14" fill="var(--accent)"/></pattern></defs>`;
+  // piso de planta
+  g += `<g class="f" style="--a:6.0s"><polygon points="${P(0,0,0)} ${P(10,0,0)} ${P(10,8,0)} ${P(0,8,0)}" fill="#151515" stroke="#2a2a2a" stroke-width="2"/>`;
+  for (let i = 1; i < 10; i++) g += line([i, 0, 0], [i, 8, 0], 1.2, '#202020');
+  for (let i = 1; i < 8; i++) g += line([0, i, 0], [10, i, 0], 1.2, '#202020');
+  g += `<polygon points="${P(5.1,6.1,0)} ${P(9.2,6.1,0)} ${P(9.2,7.8,0)} ${P(5.1,7.8,0)}" fill="url(#stripes)" opacity=".28"/></g>`;
+
+  // tanques de almacenamiento + plataforma con baranda y escalera
+  g += gen(6.4, cyl(1.7, 1.7, 1.25, 4.6, '#6e6e6e', '#4b4b4b'));
+  g += gen(6.8, cyl(4.6, 1.7, 1.25, 4.6, '#6e6e6e', '#4b4b4b'));
+  g += gen(7.2, box(0.5, 3.0, 3.0, 5.4, 0.9, 0.12, '#3f3f3f') + line([0.5, 3.9, 3.12], [5.9, 3.9, 3.12], 2.5, '#9a9a9a') + line([0.5, 3.9, 3.9], [5.9, 3.9, 3.9], 2.5, '#9a9a9a')
+    + [0.5, 1.9, 3.3, 4.6, 5.9].map((x) => line([x, 3.9, 3.12], [x, 3.9, 3.9], 2.5, '#9a9a9a')).join('')
+    + line([6.0, 3.3, 0], [6.0, 3.3, 3.1], 3, '#8a8a8a') + line([6.0, 3.7, 0], [6.0, 3.7, 3.1], 3, '#8a8a8a')
+    + [0.5, 1.1, 1.7, 2.3, 2.9].map((z) => line([6.0, 3.3, z], [6.0, 3.7, z], 2, '#8a8a8a')).join(''));
+  // rack de cañerías
+  const rack = [1.0, 4.0, 7.0, 9.6].map((x) => box(x, 5.0, 0, 0.25, 0.25, 3.5, '#4a4a4a')).join('') + box(0.8, 5.0, 3.25, 9.1, 0.9, 0.12, '#3c3c3c');
+  const pipes = box(0.8, 5.05, 3.37, 9.1, 0.24, 0.24, '#7a7a7a') + box(0.8, 5.35, 3.37, 9.1, 0.24, 0.24, '#646464') + box(0.8, 5.65, 3.37, 9.1, 0.24, 0.24, '#8a6f5c');
+  const drops = box(1.6, 2.9, 2.2, 0.24, 2.2, 0.24, '#7a7a7a') + box(4.5, 2.9, 2.6, 0.24, 2.5, 0.24, '#646464') + box(1.6, 4.9, 2.2, 0.24, 0.24, 1.2, '#7a7a7a') + box(4.5, 5.2, 2.6, 0.24, 0.24, 0.8, '#646464');
+  g += gen(7.7, drops + rack + pipes);
+  // bomba con motor + caño vertical con válvula
+  const [vx, vy] = I(6.25, 5.95, 1.8);
+  g += gen(8.4, box(6.15, 5.85, 0.95, 0.24, 0.24, 2.45, '#8a6f5c')
+    + `<ellipse cx="${vx}" cy="${vy}" rx="20" ry="11" fill="none" stroke="#b0b0b0" stroke-width="5"/><line x1="${vx - 20}" y1="${vy}" x2="${vx + 20}" y2="${vy}" stroke="#b0b0b0" stroke-width="3"/>`
+    + box(5.4, 6.4, 0, 2.6, 1.1, 0.25, '#3a3a3a') + box(5.7, 6.55, 0.25, 0.8, 0.8, 0.75, '#6d6d6d') + box(6.6, 6.6, 0.25, 1.2, 0.7, 0.6, '#565656')
+    + [6.8, 7.0, 7.2, 7.4, 7.6].map((x) => line([x, 7.3, 0.3], [x, 7.3, 0.8], 2, '#3a3a3a')).join(''));
+  // conos de seguridad
+  const cone = (x, y) => { const [cx, cy] = I(x, y, 0); return `<ellipse cx="${cx}" cy="${cy}" rx="15" ry="6" fill="#5a5a5a"/><path d="M${cx - 11},${cy} L${cx},${cy - 40} L${cx + 11},${cy}Z" fill="#bdbdbd"/><path d="M${cx - 7},${cy - 15} L${cx + 7},${cy - 15} L${cx + 5},${cy - 22} L${cx - 5},${cy - 22}Z" fill="#fff"/>`; };
+  g += gen(9.0, cone(9.4, 6.3) + cone(9.4, 7.6) + cone(5.0, 7.9));
+  // etiquetas
+  g += label(7.4, [3.15, 1.7, 4.6], 0, -60, 'Tanques de almacenamiento').replace('x2="', 'x2="').replace(/<rect x="[^"]+"/, (m) => m) ;
+  g += label(8.4, [9.7, 5.4, 3.5], 40, -40, 'Rack de cañerías');
+  g += label(9.1, [7.0, 7.0, 0.9], 30, 60, 'Bomba y válvula');
+
+  // operario en la escena (escena 3)
+  const [wx, wy] = I(3.8, 7.0, 0);
+  g += `<g class="f" style="--a:11.3s;--b:16.6s"><ellipse cx="${wx}" cy="${wy}" rx="16" ry="6" fill="#0d0d0d"/>
+    <path d="M${wx - 5},${wy} L${wx - 6},${wy - 26} M${wx + 5},${wy} L${wx + 6},${wy - 26}" stroke="#2c2c2c" stroke-width="8" stroke-linecap="round"/>
+    <rect x="${wx - 11}" y="${wy - 56}" width="22" height="32" rx="8" fill="var(--accent)"/><circle cx="${wx}" cy="${wy - 64}" r="8" fill="#3a3a3a"/><path d="M${wx - 9},${wy - 65} A9 9 0 0 1 ${wx + 9},${wy - 65}Z" fill="#fff"/></g>`;
+  // pérdida en la cañería (gotas)
+  const [lx, ly] = I(8.2, 5.8, 3.37);
+  g += `<g class="f" style="--a:13.1s;--b:16.6s" fill="var(--accent)"><ellipse cx="${lx}" cy="${ly + 14}" rx="3" ry="5"/><ellipse cx="${lx}" cy="${ly + 32}" rx="3" ry="5"/><ellipse cx="${lx}" cy="${ly + 52}" rx="3" ry="5"/></g>`;
+  // marcadores de riesgo
+  const hz = (at, t) => { const [hx, hy] = I(...at); return `<g class="hz f" style="--a:${t}s;--b:16.6s"><circle class="ring" cx="${hx}" cy="${hy}" r="24"/><circle class="core" cx="${hx}" cy="${hy}" r="9"/></g>`; };
+  g += hz([6.25, 5.95, 1.8], 12.2) + hz([8.2, 5.8, 3.37], 13.4) + hz([6.9, 7.0, 0.9], 14.6);
+  document.getElementById('iso').innerHTML = g;
+
+  setupVideo(22);
+</script>
+</body>
+</html>
