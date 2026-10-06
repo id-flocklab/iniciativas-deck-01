@@ -53,3 +53,8 @@ body:not(.render) { display: grid; place-items: center; min-height: 100vh; backg
 .controls { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; align-items: center; font: 500 14px Poppins; color: #aaa; }
 .controls button { font: inherit; padding: 8px 16px; border-radius: 8px; border: 0; background: #fff; cursor: pointer; }
 body.render .controls { display: none; }
+
+/* Cierre: la iniciativa en una frase */
+.tweet { left: 0; top: 0; width: 1920px; height: 1064px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 56px; }
+.tweet img { width: 260px; }
+.tweet p { max-width: 1320px; text-align: center; font: 500 56px/66px Poppins; letter-spacing: -.02em; }

@@ -9,7 +9,7 @@
   :root { --accent: #f77229; --sep: url(../assets/sep-orange.png); }
 
   /* Escena 1: proceso tradicional */
-  .trad { left: 60px; top: 380px; width: 860px; }
+  .trad { left: 530px; top: 360px; width: 860px; }
   .trad h4 { font: 500 22px Poppins; color: var(--muted); letter-spacing: .08em; margin-bottom: 28px; }
   .trad .r { display: flex; align-items: center; height: 64px; }
   .trad .r span { width: 250px; font: 400 24px Poppins; white-space: nowrap; }
@@ -35,7 +35,7 @@
   .checklist .chk-on { position: absolute; inset: 0; border-radius: 10px; background: var(--accent); display: grid; place-items: center; color: #000; font: 700 22px Poppins; }
 
   /* Escena 4: comparación */
-  .cmp { left: 120px; top: 420px; width: 780px; display: grid; gap: 44px; }
+  .cmp { left: 470px; top: 460px; width: 980px; display: grid; gap: 44px; }
   .cmp .l { display: flex; justify-content: space-between; font: 400 26px Poppins; margin-bottom: 14px; }
   .cmp .l b { font-weight: 500; }
   .cmp .bar { height: 40px; border-radius: 20px; transform-origin: left; animation: growx .9s cubic-bezier(.2,.8,.2,1) var(--a) both; }
@@ -48,12 +48,9 @@
   <div class="abs logo t" style="--a:.2s" id="logo"></div>
 
   <div class="abs headline t" style="--a:.5s;--b:5.2s">Hoy, crear una experiencia de VR <span class="it">lleva meses.</span></div>
-  <div class="abs sub t" style="--a:1s;--b:5.2s">Modelado 3D, escenas e interacciones, todo hecho a mano.</div>
   <div class="abs headline t" style="--a:5.7s;--b:10.6s">Con IA generativa <span class="it">armamos la escena…</span></div>
-  <div class="abs sub t" style="--a:6.1s;--b:10.6s">A partir de un procedimiento escrito, la IA genera los objetos y los ubica.</div>
   <div class="abs headline t" style="--a:11.1s;--b:16.6s">…y el operario <span class="it">practica sin riesgo.</span></div>
-  <div class="abs sub t" style="--a:11.5s;--b:16.6s">Entrena en un escenario realista antes de ir a planta.</div>
-  <div class="abs headline t" style="--a:17.1s">De meses <span class="it">a semanas.</span></div>
+  <div class="abs headline t" style="--a:17.1s;--b:20.0s">De meses <span class="it">a semanas.</span></div>
 
   <!-- Escena 1 -->
   <div class="abs trad t" style="--a:1.2s;--b:5.2s">
@@ -65,11 +62,9 @@
     <div class="r"><span>Pruebas</span><div class="track"><div class="b" style="--a:3.2s;left:88%;width:12%"></div></div></div>
     <div class="total t" style="--a:3.7s">3 a 6 meses</div>
   </div>
-  <div class="abs panel card t" style="--a:2.2s;--b:5.2s;top:420px">
-    <div class="quote">Muchos clientes <br>nos piden VR.<small>Hoy no tenemos una solución propia para responder a esa demanda.</small></div>
-  </div>
 
   <!-- Escena 2-3 -->
+  <div class="abs" style="left:0;top:0;width:1920px;height:1080px;transform:translateX(400px)">
   <div class="abs doc t" style="--a:6.3s;--b:10.6s">
     <b>Procedimiento: inspección de bomba y válvula</b>
     <i style="width:90%"></i><i style="width:75%"></i><i style="width:84%"></i><i style="width:60%"></i><i style="width:80%"></i><i style="width:70%"></i>
@@ -77,28 +72,17 @@
   <div class="abs arrow" style="--a:6.9s;--b:10.6s"></div>
   <svg class="abs isoscene f" style="--a:6.0s;--b:16.6s" viewBox="-330 -290 720 772" id="iso"></svg>
   <svg class="abs vr t" style="--a:11.6s;--b:16.6s" width="150" height="90" viewBox="0 0 150 90"><rect x="6" y="16" width="138" height="60" rx="22" fill="#fff"/><rect x="20" y="28" width="48" height="36" rx="12" fill="#111"/><rect x="82" y="28" width="48" height="36" rx="12" fill="#111"/><path d="M66 76 Q75 62 84 76" fill="#000"/><rect x="0" y="36" width="10" height="20" rx="4" fill="#999"/><rect x="140" y="36" width="10" height="20" rx="4" fill="#999"/></svg>
-
-  <div class="abs panel rows" style="top:380px">
-    <div class="row t" style="--a:7.2s;--b:10.6s"><span class="dot"></span>Lee el procedimiento</div>
-    <div class="row t" style="--a:7.9s;--b:10.6s"><span class="dot"></span>Genera los objetos 3D</div>
-    <div class="row t" style="--a:8.6s;--b:10.6s"><span class="dot"></span>Arma la escena en Unreal</div>
-  </div>
-  <div class="abs panel rows checklist" style="top:380px">
-    <div class="row t" style="--a:11.4s;--b:16.6s"><span class="chk" style="position:relative">·<span class="chk-on p" style="--a:12.6s">✓</span></span>Válvula sin bloqueo</div>
-    <div class="row t" style="--a:11.6s;--b:16.6s"><span class="chk" style="position:relative">·<span class="chk-on p" style="--a:13.8s">✓</span></span>Pérdida en la cañería</div>
-    <div class="row t" style="--a:11.8s;--b:16.6s"><span class="chk" style="position:relative">·<span class="chk-on p" style="--a:15.0s">✓</span></span>Bomba sin protección</div>
   </div>
 
   <!-- Escena 4 -->
-  <div class="abs cmp t" style="--a:17.3s">
+  <div class="abs cmp t" style="--a:17.3s;--b:20.0s">
     <div><div class="l"><span>Proceso tradicional</span><b>3 a 6 meses</b></div><div class="bar" style="--a:17.6s;background:#3a3a3a;width:100%"></div></div>
     <div><div class="l"><span>Con IA generativa</span><b>semanas</b></div><div class="bar" style="--a:18.2s;background:var(--accent);width:22%;box-shadow:0 0 24px rgba(247,114,41,.5)"></div></div>
-    <div class="note">El mercado ya habla de escenarios en ~3 semanas: queremos validar cuánto podemos acelerar.</div>
   </div>
-  <div class="abs panel kpis" style="top:330px">
-    <div class="kpi t" style="--a:18.0s"><span class="ribbon"></span><b>Semanas</b><p>para un escenario completo, <br>no meses</p></div>
-    <div class="kpi t" style="--a:18.5s"><span class="ribbon"></span><b>Reutilizable</b><p>objetos 3D entre <br>proyectos y clientes</p></div>
-    <div class="kpi t" style="--a:19.0s"><span class="ribbon"></span><b>Nueva</b><p>capacidad de VR para <br>clientes industriales</p></div>
+  <!-- Cierre: la iniciativa en una frase -->
+  <div class="abs tweet f" style="--a:20.3s">
+    <img src="../assets/logo-i2.png" alt="">
+    <p>Generamos escenarios de capacitación en VR con IA, <span class="it">en semanas en vez de meses.</span></p>
   </div>
 
   <div class="abs sep"></div>
@@ -174,7 +158,7 @@
   g += hz([6.25, 5.95, 1.8], 12.2) + hz([8.2, 5.8, 3.37], 13.4) + hz([6.9, 7.0, 0.9], 14.6);
   document.getElementById('iso').innerHTML = g;
 
-  setupVideo(22);
+  setupVideo(24);
 </script>
 </body>
 </html>

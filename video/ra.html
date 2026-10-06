@@ -14,6 +14,8 @@
   .wheel { transform-box: fill-box; transform-origin: center; animation: spin 3.2s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .worker-dim { --dim: 999s; }
+  .mover { left: 0; top: 0; width: 1920px; height: 1080px; animation: shiftr .9s cubic-bezier(.4,0,.2,1) 5.3s both; }
+  @keyframes shiftr { from { transform: none; } to { transform: translateX(380px); } }
 
   /* Escena 1: papeles */
   .docs { position: relative; height: 330px; }
@@ -55,14 +57,11 @@
   <div class="abs logo t" style="--a:.2s" id="logo"></div>
 
   <div class="abs headline t" style="--a:.5s;--b:5.2s">Hoy, el saber operativo <span class="it">queda en pocas personas.</span></div>
-  <div class="abs sub t" style="--a:1s;--b:5.2s">Documentar una tarea lleva semanas y se desactualiza rápido.</div>
   <div class="abs headline t" style="--a:5.7s;--b:10.6s">Con gafas de RA, <span class="it">el experto solo trabaja.</span></div>
-  <div class="abs sub t" style="--a:6.1s;--b:10.6s">Tiene las manos ocupadas: las gafas graban y escuchan mientras explica.</div>
   <div class="abs headline t" style="--a:11.1s;--b:16.6s">La IA arma <span class="it">el borrador del curso.</span></div>
-  <div class="abs sub t" style="--a:11.5s;--b:16.6s">Un experto lo revisa y lo publica en Trainly.</div>
-  <div class="abs headline t" style="--a:17.1s">Capacitación desde <span class="it">el trabajo real.</span></div>
 
   <!-- Operario en una válvula (escenas 1-2) -->
+  <div class="abs mover">
   <div class="abs scene f" style="--a:.6s;--b:10.6s">
     <svg class="abs" style="left:0;top:0" width="760" height="640" viewBox="0 0 760 640" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <rect x="470" y="60" width="28" height="560" rx="8" fill="#333"/>
@@ -76,23 +75,17 @@
     <div class="abs wave f" style="--a:7.0s" id="wave"></div>
     <div class="abs bubble t" style="--a:7.6s">“Primero cierro la válvula principal y verifico la presión…”</div>
   </div>
+  </div>
 
   <!-- Escena 1: papeles -->
-  <div class="abs panel t" style="--a:1.6s;--b:5.2s">
+  <div class="abs panel t" style="--a:1.6s;--b:5.2s;top:400px;left:1060px">
     <div class="docs">
       <div class="sheet" style="left:0;top:20px;transform:rotate(-6deg)"><b>Procedimiento v1</b><i style="width:90%"></i><i style="width:70%"></i><i style="width:80%"></i><i style="width:60%"></i></div>
       <div class="sheet" style="left:150px;top:0;transform:rotate(3deg)"><b>Procedimiento v2</b><i style="width:85%"></i><i style="width:75%"></i><i style="width:65%"></i><i style="width:80%"></i></div>
       <div class="stamp p" style="--a:3.2s;left:200px;top:150px">DESACTUALIZADO</div>
     </div>
-    <div class="docs-txt">Lo que sabe el experto <br>no llega al resto del equipo.<small>Observar, redactar y editar consume días de trabajo.</small></div>
   </div>
 
-  <!-- Escena 2: beneficios -->
-  <div class="abs panel rows" style="top:380px">
-    <div class="row t" style="--a:7.2s;--b:10.6s"><span class="dot"></span>Manos libres para trabajar</div>
-    <div class="row t" style="--a:7.9s;--b:10.6s"><span class="dot"></span>Graba video y voz del experto</div>
-    <div class="row t" style="--a:8.6s;--b:10.6s"><span class="dot"></span>No interrumpe la tarea</div>
-  </div>
 
   <!-- Escena 3: video → IA → curso -->
   <div class="abs strip">
@@ -113,14 +106,10 @@
     <div class="tags"><span class="tag t" style="--a:14.8s">Riesgo: presión</span><span class="tag t" style="--a:15.0s">EPP: guantes</span><span class="tag t" style="--a:15.2s">Herramienta: llave</span></div>
   </div>
 
-  <!-- Escena 4 -->
-  <div class="abs f" style="--a:17.4s;left:120px;top:400px;width:760px;height:560px;display:grid;place-items:center">
-    <img src="../assets/logo-i3.png" style="width:440px">
-  </div>
-  <div class="abs panel kpis" style="top:330px">
-    <div class="kpi t" style="--a:17.6s"><span class="ribbon"></span><b>Días</b><p>para documentar una tarea, <br>no semanas</p></div>
-    <div class="kpi t" style="--a:18.1s"><span class="ribbon"></span><b>Al día</b><p>se vuelve a grabar cuando <br>cambia el proceso</p></div>
-    <div class="kpi t" style="--a:18.6s"><span class="ribbon"></span><b>Dataset</b><p>video real útil para robótica <br>y otros modelos</p></div>
+  <!-- Cierre: la iniciativa en una frase -->
+  <div class="abs tweet f" style="--a:17.0s">
+    <img src="../assets/logo-i3.png" alt="">
+    <p>El experto trabaja con gafas de RA y la IA <span class="it">convierte lo que hace en un curso.</span></p>
   </div>
 
   <div class="abs sep"></div>
