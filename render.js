@@ -103,6 +103,14 @@ const T = {
       </div>`);
   },
 
+  // Cierre de cada iniciativa: espacio de preguntas + decisión (avanzamos / no avanzamos)
+  decision: (s) => withBody(s, `
+    <div class="facts">${s.facts.map(([k, v]) => `<div class="fact"><div class="fact-k">${rich(k)}</div><div class="fact-v">${rich(v)}</div></div>`).join('')}</div>
+    <div class="choices">
+      <div class="choice yes"><div class="choice-i">✓</div><div><div class="choice-t">Avanzamos</div><div class="choice-d">${rich(s.yes)}</div></div></div>
+      <div class="choice no"><div class="choice-i">✕</div><div><div class="choice-t">No avanzamos</div><div class="choice-d">${rich(s.no)}</div></div></div>
+    </div>`),
+
   // Video explicativo a pantalla completa. En el PDF se muestra el cuadro final (poster).
   video: (s) => document.body.classList.contains('print')
     ? `<img class="vid" src="assets/video/${s.src}-poster.jpg" alt="">`

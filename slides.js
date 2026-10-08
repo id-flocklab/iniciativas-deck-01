@@ -1,7 +1,7 @@
 // Contenido del deck. Cada slide = { type, theme, ...datos }.
 // Texto entre *asteriscos* = Newsreader Light Italic (el acento en cursiva).
 // themes: deck (violeta) · i1 (magenta) · i2 (naranja) · i3 (verde)
-// types: cover · section · video · list · cards · steps · clients · quote · gantt · closing
+// types: cover · section · video · decision · list · cards · steps · clients · quote · gantt · closing
 // video: { src: 'cv' } → reproduce out/video/cv.mp4 al entrar a la slide (en el PDF va el cuadro final)
 
 const I1 = 'INICIATIVA 01 · MEDIMOS TIEMPOS DE CICLO DE TAREAS REPETITIVAS CON COMPUTER VISION';
@@ -124,6 +124,20 @@ window.SLIDES = [
     ],
   },
 
+  {
+    type: 'decision', theme: 'i1',
+    kicker: I1,
+    title: 'Preguntas y *decisión*',
+    subtitle: '¿Avanzamos con esta iniciativa?',
+    facts: [
+      ['Duración', '2 meses'],
+      ['Complejidad', 'Media'],
+      ['Del cliente', 'Video de la línea y prueba en planta'],
+    ],
+    yes: 'Arrancamos con la hipótesis y coordinamos con los sponsors el material de video.',
+    no: 'Registramos lo aprendido y priorizamos otra iniciativa de I+D.',
+  },
+
   // ───────────── INICIATIVA 02 ─────────────
   {
     type: 'section', theme: 'i2', logo: 'logo-i2.png', logoBox: [1424, 375, 362, 338.5],
@@ -221,6 +235,20 @@ window.SLIDES = [
     ],
   },
 
+  {
+    type: 'decision', theme: 'i2',
+    kicker: I2,
+    title: 'Preguntas y *decisión*',
+    subtitle: '¿Avanzamos con esta iniciativa?',
+    facts: [
+      ['Duración', '2 a 4 meses'],
+      ['Complejidad', 'Alta'],
+      ['Necesitamos', 'Definir el caso de uso con Industrias 4.0'],
+    ],
+    yes: 'Definimos el caso de uso y arrancamos el smoke test con un escenario industrial.',
+    no: 'Registramos lo aprendido y priorizamos otra iniciativa de I+D.',
+  },
+
   // ───────────── INICIATIVA 03 ─────────────
   {
     type: 'section', theme: 'i3', logo: 'logo-i3.png', logoBox: [1424, 375, 362, 338.5],
@@ -315,6 +343,20 @@ window.SLIDES = [
       'Demostrar impacto con métricas del piloto antes de escalar.',
       'Trainly: crear contenido desde el trabajo real.',
     ],
+  },
+
+  {
+    type: 'decision', theme: 'i3',
+    kicker: I3,
+    title: 'Preguntas y *decisión*',
+    subtitle: '¿Avanzamos con esta iniciativa?',
+    facts: [
+      ['Duración', '1,5 meses'],
+      ['Complejidad', 'Baja'],
+      ['Necesitamos', 'Un experto y un procedimiento real'],
+    ],
+    yes: 'Elegimos el procedimiento piloto y el experto que lo va a grabar.',
+    no: 'Registramos lo aprendido y priorizamos otra iniciativa de I+D.',
   },
 
   // ───────────── CIERRE ─────────────
