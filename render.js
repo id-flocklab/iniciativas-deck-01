@@ -53,6 +53,7 @@ const T = {
     <div class="cover-left" style="left:78px;width:1200px">
       <div class="cover-kicker it">${rich(s.kicker).replace(/<\/?em[^>]*>/g, '')}</div>
       <div class="cover-title">${rich(s.title)}</div>
+      ${s.status ? `<div class="status"><i></i>${rich(s.status)}</div>` : ''}
     </div>
     <div class="cover-foot" style="left:78px">${rich(s.foot)}</div>
     <img class="abs" src="assets/${s.logo}" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px">`;
@@ -83,11 +84,17 @@ const T = {
     const W = 175; // px por semana
     const weeks = Array.from({ length: 8 }, (_, i) => `<div class="g-week">S${i + 1}</div>`).join('');
     const lines = '<i></i>'.repeat(9);
-    const rows = s.rows.map(([name, start, len, op, big], i) => `
-      <div class="g-row">
-        <div class="g-label"><div class="g-n">${nn(i)}</div><div class="g-t">${rich(name)}</div></div>
-        <div class="g-track"><div class="g-bar${big ? ' big' : ''}" style="left:${start * W}px;width:${len * W}px;opacity:${op ?? 1}"></div></div>
-      </div>`).join('');
+    // s.done: etapas ya cerradas (las primeras N). La siguiente queda "en curso"; el resto, pendiente.
+    const state = (i) => (s.done == null ? '' : i < s.done ? 'done' : i === s.done ? 'now' : 'next');
+    const rows = s.rows.map(([name, start, len, op, big], i) => {
+      const st = state(i);
+      const tag = st === 'done' ? '<span class="g-tag">Completada</span>' : st === 'now' ? `<span class="g-tag now">${rich(s.nowLabel || 'En curso')}</span>` : '';
+      return `
+      <div class="g-row ${st}">
+        <div class="g-label"><div class="g-n">${st === 'done' ? '✓' : nn(i)}</div><div class="g-t">${rich(name)}</div></div>
+        <div class="g-track"><div class="g-bar${big ? ' big' : ''}" style="left:${start * W}px;width:${len * W}px;opacity:${st ? 1 : op ?? 1}"></div>${tag ? `<div class="g-tagwrap" style="left:${(start + len) * W + 16}px">${tag}</div>` : ''}</div>
+      </div>`;
+    }).join('');
     // bands: [{ from, len, label, text }] → franjas sombreadas (ej. participación del cliente)
     const bands = (s.bands || []).map((b) => `<div class="g-band" style="left:${320 + b.from * W}px;width:${b.len * W}px"></div>`).join('');
     const bandRow = s.bands ? `
@@ -105,10 +112,11 @@ const T = {
 
   // Cierre de cada iniciativa: espacio de preguntas + decisión (avanzamos / no avanzamos)
   decision: (s) => withBody(s, `
+    ${s.status ? `<div class="state"><span class="state-k">Estado actual</span><span class="state-v">${rich(s.status)}</span></div>` : ''}
     <div class="facts">${s.facts.map(([k, v]) => `<div class="fact"><div class="fact-k">${rich(k)}</div><div class="fact-v">${rich(v)}</div></div>`).join('')}</div>
     <div class="choices">
-      <div class="choice yes"><div class="choice-i">✓</div><div><div class="choice-t">Avanzamos</div><div class="choice-d">${rich(s.yes)}</div></div></div>
-      <div class="choice no"><div class="choice-i">✕</div><div><div class="choice-t">No avanzamos</div><div class="choice-d">${rich(s.no)}</div></div></div>
+      <div class="choice yes"><div class="choice-i">✓</div><div><div class="choice-t">${rich(s.yesLabel || 'Avanzamos')}</div><div class="choice-d">${rich(s.yes)}</div></div></div>
+      <div class="choice no"><div class="choice-i">✕</div><div><div class="choice-t">${rich(s.noLabel || 'No avanzamos')}</div><div class="choice-d">${rich(s.no)}</div></div></div>
     </div>`),
 
   // Video explicativo a pantalla completa. En el PDF se muestra el cuadro final (poster).

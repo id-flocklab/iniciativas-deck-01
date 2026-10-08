@@ -35,6 +35,7 @@ window.SLIDES = [
     kicker: '*I+D · Iniciativa 01*',
     title: 'Control de eficiencia en *tareas repetitivas*',
     foot: 'COMPUTER VISION · AUTOMATIZACIÓN · MEDICIÓN DE TIEMPOS',
+    status: 'En implementación',
   },
   { type: 'video', theme: 'i1', src: 'cv' },
   {
@@ -72,6 +73,8 @@ window.SLIDES = [
     kicker: I1,
     title: 'Planificación *de la iniciativa*',
     subtitle: '2 meses · Complejidad media.',
+    done: 2,
+    nowLabel: 'En curso · entrenamiento con datasets',
     months: ['MES 1', 'MES 2'],
     // [etapa, semana inicio, duración en semanas, opacidad, destacada]
     rows: [
@@ -128,14 +131,17 @@ window.SLIDES = [
     type: 'decision', theme: 'i1',
     kicker: I1,
     title: 'Preguntas y *decisión*',
-    subtitle: '¿Avanzamos con esta iniciativa?',
+    subtitle: '¿Seguimos con esta iniciativa?',
+    yesLabel: 'Seguimos',
+    noLabel: 'No seguimos',
     facts: [
       ['Duración', '2 meses'],
       ['Complejidad', 'Media'],
       ['Del cliente', 'Video de la línea y prueba en planta'],
     ],
-    yes: 'Arrancamos con la hipótesis y coordinamos con los sponsors el material de video.',
-    no: 'Registramos lo aprendido y priorizamos otra iniciativa de I+D.',
+    status: 'Hipótesis e investigación cerradas · en implementación, por entrenar los modelos con los datasets.',
+    yes: 'Entrenamos los modelos con los datasets y validamos contra medición manual en planta.',
+    no: 'Cerramos con lo aprendido hasta acá y priorizamos otra iniciativa de I+D.',
   },
 
   // ───────────── INICIATIVA 02 ─────────────
@@ -144,6 +150,7 @@ window.SLIDES = [
     kicker: '*I+D · Iniciativa 02*',
     title: 'Capacitación *inmersiva con IA*',
     foot: 'EXPERIENCIAS INMERSIVAS · PRODUCTO · UNREAL ENGINE',
+    status: 'En POC y demos',
   },
   { type: 'video', theme: 'i2', src: 'vr' },
   {
@@ -182,6 +189,8 @@ window.SLIDES = [
     title: 'Plan de investigación *de 2 a 4 meses*',
     subtitle: '2 a 4 meses · Complejidad alta.',
     note: '📌 El timeline mostrado es el escenario mínimo (2 meses). Según el caso de uso seleccionado y la complejidad del escenario a construir, la iniciativa puede extenderse hasta 4 meses. La definición del caso de uso depende de una decisión de Industrias 4.0.',
+    done: 2,
+    nowLabel: 'En curso · demos',
     months: ['MES 1', 'MES 2-4'],
     rows: [
       ['Hipótesis y smoke test', 0, 1, 0.6],
@@ -239,14 +248,17 @@ window.SLIDES = [
     type: 'decision', theme: 'i2',
     kicker: I2,
     title: 'Preguntas y *decisión*',
-    subtitle: '¿Avanzamos con esta iniciativa?',
+    subtitle: '¿Seguimos con esta iniciativa?',
+    yesLabel: 'Seguimos',
+    noLabel: 'No seguimos',
     facts: [
       ['Duración', '2 a 4 meses'],
       ['Complejidad', 'Alta'],
-      ['Necesitamos', 'Definir el caso de uso con Industrias 4.0'],
+      ['Necesitamos', 'Clientes para validar las demos'],
     ],
-    yes: 'Definimos el caso de uso y arrancamos el smoke test con un escenario industrial.',
-    no: 'Registramos lo aprendido y priorizamos otra iniciativa de I+D.',
+    status: 'Assets 3D y escenarios ya generados · armando las demos de la POC.',
+    yes: 'Cerramos las demos y las validamos con clientes: calidad y tiempos frente al proceso tradicional.',
+    no: 'Cerramos con lo aprendido hasta acá y priorizamos otra iniciativa de I+D.',
   },
 
   // ───────────── INICIATIVA 03 ─────────────
@@ -255,6 +267,7 @@ window.SLIDES = [
     kicker: '*I+D · Iniciativa 03*',
     title: 'Learning basado en video: *multimodal en Trainly*',
     foot: 'AGENTES · PRODUCTO',
+    status: 'En demo con lentes de RA',
   },
   { type: 'video', theme: 'i3', src: 'ra' },
   {
@@ -294,6 +307,8 @@ window.SLIDES = [
     kicker: I3,
     title: 'Plan de investigación *de 1,5 meses*',
     subtitle: '1 a 2 meses · Complejidad baja.',
+    done: 2,
+    nowLabel: 'En curso · demo RA + Trainly',
     months: ['MES 1', 'MES 2'],
     rows: [
       ['Hipótesis del problema', 0, 1, 0.6],
@@ -349,14 +364,17 @@ window.SLIDES = [
     type: 'decision', theme: 'i3',
     kicker: I3,
     title: 'Preguntas y *decisión*',
-    subtitle: '¿Avanzamos con esta iniciativa?',
+    subtitle: '¿Seguimos con esta iniciativa?',
+    yesLabel: 'Seguimos',
+    noLabel: 'No seguimos',
     facts: [
       ['Duración', '1,5 meses'],
       ['Complejidad', 'Baja'],
       ['Necesitamos', 'Un experto y un procedimiento real'],
     ],
-    yes: 'Elegimos el procedimiento piloto y el experto que lo va a grabar.',
-    no: 'Registramos lo aprendido y priorizamos otra iniciativa de I+D.',
+    status: 'Exploración con video generativo casi completa · en demo con lentes de RA e integración con Trainly.',
+    yes: 'Completamos la demo con lentes de RA y Trainly, y la validamos con un experto en un procedimiento real.',
+    no: 'Cerramos con lo aprendido hasta acá y priorizamos otra iniciativa de I+D.',
   },
 
   // ───────────── CIERRE ─────────────
