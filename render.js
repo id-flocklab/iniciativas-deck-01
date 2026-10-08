@@ -44,7 +44,7 @@ const T = {
       <div class="cover-title">${rich(s.title)}</div>
     </div>
     <div class="cover-foot" style="left:64px">${rich(s.foot)}</div>
-    <img class="abs" src="assets/cover-shader.png" style="left:1242.47px;top:0;width:678px;height:1080px">
+    <img class="abs bleed-r" src="assets/cover-shader.png" style="--x:1242.47px">
     <div class="abs" style="left:1418.36px;top:390.52px;width:324.82px;height:303.54px">${LOGO('black').replace('<svg', '<svg width="100%" height="100%"')}</div>`,
 
   section: (s) => {
@@ -121,12 +121,14 @@ function renderDeck() {
   deck.innerHTML = window.SLIDES.map((s, i) => `
     <div class="screen">
       <div class="frame" id="s${i + 1}">
-        <div class="num">${i + 1} / ${total()}</div>
-        <section class="slide theme-${s.theme || 'deck'}">${T[s.type](s)}</section>
+        <section class="slide theme-${s.theme || 'deck'}"><div class="stage">${T[s.type](s)}</div></section>
       </div>
     </div>`).join('');
+  // Lo que debe llegar a los bordes de la pantalla (franja inferior, panel de portada) sale del lienzo 16:9
+  deck.querySelectorAll('.stage > .sep, .stage > .bleed-r').forEach((el) => el.closest('.slide').prepend(el)); // detrás del contenido
   fit();
   setupVideos();
+  setupNav();
 }
 
 // Los videos arrancan desde el principio cada vez que se entra a su slide y se pausan al salir
@@ -144,22 +146,55 @@ function setupVideos() {
   });
 }
 
-// Escala cada slide para ocupar la pantalla completa (sin bordes de sobra, sin tope de tamaño)
+// Cada slide ocupa la pantalla entera: el contenido 16:9 se escala para entrar completo
+// y el lienzo se extiende en la dirección que sobra (fondo y franjas llegan a los bordes).
 function fit() {
   if (document.body.classList.contains('print')) return;
   const { clientWidth: w, clientHeight: h } = document.documentElement; // sin la barra de scroll
   const scale = Math.min(w / 1920, h / 1080);
-  document.querySelectorAll('.frame').forEach((f) => f.style.setProperty('--scale', scale));
+  document.querySelectorAll('.frame').forEach((f) => {
+    f.style.setProperty('--scale', scale);
+    f.style.setProperty('--cw', `${w / scale}px`);
+    f.style.setProperty('--ch', `${h / scale}px`);
+  });
 }
 
-// Navegación con teclado: una slide por vez
+// Navegación: barra flotante (anterior / contador / siguiente / pantalla completa) + teclado
 const current = () => Math.round(window.scrollY / window.innerHeight);
-const go = (i) => window.scrollTo({ top: Math.max(0, Math.min(total() - 1, i)) * window.innerHeight, behavior: 'smooth' });
+let navUpdate = () => {};
+const go = (i) => { window.scrollTo({ top: Math.max(0, Math.min(total() - 1, i)) * window.innerHeight, behavior: 'instant' }); navUpdate(); };
+
+function setupNav() {
+  if (document.body.classList.contains('print') || document.querySelector('.nav')) return;
+  const nav = document.createElement('nav');
+  nav.className = 'nav';
+  nav.innerHTML = `<button class="prev" aria-label="Slide anterior">‹</button><span class="count"></span><button class="next" aria-label="Slide siguiente">›</button><button class="fs" aria-label="Pantalla completa">⤢</button>`;
+  document.body.appendChild(nav);
+  const count = nav.querySelector('.count');
+  const update = navUpdate = () => {
+    const i = current();
+    count.textContent = `${i + 1} / ${total()}`;
+    nav.querySelector('.prev').disabled = i === 0;
+    nav.querySelector('.next').disabled = i === total() - 1;
+  };
+  nav.querySelector('.prev').onclick = () => go(current() - 1);
+  nav.querySelector('.next').onclick = () => go(current() + 1);
+  nav.querySelector('.fs').onclick = () => (document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen());
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+  // Se oculta sola tras unos segundos sin mover el mouse
+  let idle;
+  const wake = () => { document.body.classList.remove('idle'); clearTimeout(idle); idle = setTimeout(() => document.body.classList.add('idle'), 2500); };
+  ['mousemove', 'pointerdown', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, wake, { passive: true }));
+  wake();
+}
+
 window.addEventListener('keydown', (e) => {
   if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(current() + 1); }
   if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(current() - 1); }
   if (e.key === 'Home') { e.preventDefault(); go(0); }
   if (e.key === 'End') { e.preventDefault(); go(total() - 1); }
+  if (e.key === 'f') document.querySelector('.nav .fs')?.click();
 });
 
 if (new URLSearchParams(location.search).has('print')) document.body.classList.add('print');
