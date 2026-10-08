@@ -372,7 +372,6 @@ window.SLIDES = [
       ['Complejidad', 'Baja'],
       ['Necesitamos', 'Un experto y un procedimiento real'],
     ],
-    status: 'Exploración con video generativo casi completa · en demo con lentes de RA e integración con Trainly.',
     yes: 'Completamos la demo con lentes de RA y Trainly, y la validamos con un experto en un procedimiento real.',
     no: 'Cerramos con lo aprendido hasta acá y priorizamos otra iniciativa de I+D.',
   },
