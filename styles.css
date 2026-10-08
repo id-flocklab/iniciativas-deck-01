@@ -141,6 +141,8 @@ body.print .frame .num { display: none; }
 
 /* ---------- Video ---------- */
 .vid { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; object-fit: cover; background: #000; }
+/* La franja inferior viene dibujada en el video: se recorta y se usa la de la slide (pegada al borde de la pantalla) */
+video.vid { clip-path: inset(0 0 16px 0); }
 .replay { position: absolute; right: 60px; bottom: 48px; z-index: 3; padding: 14px 24px; border: 0; border-radius: 10px; background: rgba(255,255,255,.12); color: #fff; font: 500 22px Poppins; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .3s; }
 .replay.show { opacity: 1; pointer-events: auto; }
 .replay:hover { background: rgba(255,255,255,.2); }

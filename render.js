@@ -107,7 +107,8 @@ const T = {
   video: (s) => document.body.classList.contains('print')
     ? `<img class="vid" src="assets/video/${s.src}-poster.jpg" alt="">`
     : `<video class="vid" src="out/video/${s.src}.mp4" poster="assets/video/${s.src}-poster.jpg" muted playsinline preload="auto"></video>
-       <button class="replay" type="button">↻ Ver de nuevo</button>`,
+       <button class="replay" type="button">↻ Ver de nuevo</button>
+       <div class="sep"></div>`,
 
   closing: (s) => `
     <img class="abs" src="assets/logo-close.png" style="left:872.5px;top:458px;width:175px;height:164px">
