@@ -147,7 +147,8 @@ function setupVideos() {
 // Escala cada slide para ocupar la pantalla completa (sin bordes de sobra, sin tope de tamaño)
 function fit() {
   if (document.body.classList.contains('print')) return;
-  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  const { clientWidth: w, clientHeight: h } = document.documentElement; // sin la barra de scroll
+  const scale = Math.min(w / 1920, h / 1080);
   document.querySelectorAll('.frame').forEach((f) => f.style.setProperty('--scale', scale));
 }
 
