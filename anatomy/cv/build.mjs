@@ -32,7 +32,7 @@ const BOX_Y = 2;
 const SPACING = 96;
 
 const OP = [-14, -32]; // operario (pies)
-const SHOULDER_Z = 84;
+const SHOULDER_Z = 81;
 const ARM = 25; // largo de brazo y antebrazo
 
 const POST = [156, -96];
@@ -210,7 +210,7 @@ function pallet() {
 
 // ── Estante con bandejas de piezas (detrás del operario) ──
 function rack() {
-  const R = { x: -150, y: -100, w: 46, d: 28, r: 1 };
+  const R = { x: -158, y: -62, w: 46, d: 28, r: 1 };
   const out = [`<path class="iso-halo" d="${k.haloOf(R, 0, 4, P)}"/>`];
   const legs = k.corners(R, 2.5);
   for (const [x, y] of byDepth(legs)) out.push(S(k.slabOf({ x: x - 1.6, y: y - 1.6, w: 3.2, d: 3.2, r: 0.5 }, 0, 36, P, 2), { tone: "mid" }));
@@ -229,23 +229,36 @@ function rack() {
 }
 
 // ── Operario (cuerpo estático detrás de la cinta) ──
-const HEAD = [OP[0], OP[1], 104];
+const HEAD = [OP[0], OP[1], 99.5];
 function operator() {
   const out = [];
   const [x, y] = OP;
-  out.push(`<path class="iso-halo" d="${k.haloOf({ x: x - 16, y: y - 10, w: 32, d: 22, r: 10 }, 0, 0.1, P)}" style="filter:blur(3px)"/>`);
-  for (const dx of [-5.5, 5.5]) {
-    out.push(S(k.slabOf({ x: x + dx - 4, y: y - 5, w: 8, d: 15, r: 3 }, 0, 4.4, P, 4, 0.4), { tone: "lo" }));
-    out.push(S(k.cylinder(x + dx, y, 4.6, 4.4, 42, P, 24), { tone: "lo", crease: "none" }));
+  out.push(`<path class="iso-halo" d="${k.haloOf({ x: x - 16, y: y - 10, w: 32, d: 24, r: 10 }, 0, 0.1, P)}" style="filter:blur(3px)"/>`);
+  // botines con puntera y piernas del pantalón
+  for (const dx of [-5.2, 5.2]) {
+    out.push(S(k.slabOf({ x: x + dx - 4.2, y: y - 5, w: 8.4, d: 17, r: 3.8 }, 0, 4.6, P, 5, 0.5), { tone: "lo" }));
+    const leg = { x: x + dx - 4.5, y: y - 4.6, w: 9, d: 9.4, r: 4.3 };
+    out.push(S(k.slabOf(leg, 4.6, 40, P, 6), { tone: "lo", crease: "none", inner: L(k.sideSeam(leg, 25, P, 6), { tone: "faint" }) }));
   }
-  const torso = up([x, y, 46]);
-  const profile = [[0, 0], [0, 10.5], [3, 11.6, 1], [14, 12.6, 1], [30, 13, 1], [37, 11.5, 1], [40, 8], [40, 0]];
-  out.push(S(G.solidOf(profile, torso, P), { tone: "hi", crease: "lo", inner: [21, 25].map((s) => L(G.arcOf(torso, s, 12.9, P), { tone: "mid" })).join("") }));
-  out.push(S(k.cylinder(x, y, 4, 86, 6, P, 20), { tone: "mid" }));
-  out.push(S(G.sphereOf(HEAD, 8.6, P), { tone: "mid" }));
-  const hat = up([x, y, HEAD[2] + 1.5]);
-  out.push(S(G.disc(0, 1.1, 11.2, hat, P), { tone: "hi" }));
-  out.push(S(G.solidOf([[1.1, 0], [1.1, 9.4], [3.5, 9.1, 1], [6.5, 7.6, 1], [9, 4.6, 1], [10.2, 0]], hat, P), { tone: "hi", crease: "lo" }));
+  // cadera con cinturón, abdomen y pecho con chaleco reflectivo
+  const hips = { x: x - 11, y: y - 6, w: 22, d: 12.5, r: 5.6 };
+  out.push(S(k.slabOf(hips, 42, 11, P, 6), { tone: "lo", inner: L(k.sideSeam(hips, 50.5, P, 6), { tone: "mid" }) }));
+  const belly = { x: x - 11.6, y: y - 6.6, w: 23.2, d: 13.6, r: 6.2 };
+  out.push(S(k.slabOf(belly, 53, 13, P, 6), { tone: "hi", crease: "lo", inner: L(k.sideSeam(belly, 59, P, 6), { tone: "mid" }) }));
+  const chest = { x: x - 14.5, y: y - 7.6, w: 29, d: 15.6, r: 7.4 };
+  out.push(S(k.slabOf(chest, 66, 18, P, 6, 0.6), { tone: "hi", crease: "lo", inner: L(k.sideSeam(chest, 73, P, 6), { tone: "mid" }) }));
+  // cuello del chaleco y hombros redondeados
+  out.push(S(k.cylinder(x, y, 6.4, 84, 1.6, P, 24), { tone: "mid" }));
+  for (const dx of [-12.8, 12.8]) out.push(S(G.sphereOf([x + dx, y + 0.4, SHOULDER_Z], 6, P), { tone: "hi" }));
+  out.push(S(k.cylinder(x, y, 3.8, 85.6, 5.6, P, 20), { tone: "mid" }));
+  // cabeza con anteojos de seguridad y casco con ala
+  out.push(S(G.sphereOf(HEAD, 8.2, P), { tone: "mid" }));
+  const face = up([HEAD[0], HEAD[1], HEAD[2] - 0.4]);
+  out.push(`<g style="stroke-width:2.2">${L(G.arcOf(face, 0, 8.15, P), { tone: "hi" })}</g>`);
+  out.push(L(G.arcOf(face, -4.6, 6.8, P, { from: Math.PI * 0.3, to: Math.PI * 0.7 }), { tone: "lo" }));
+  const hat = up([x, y, HEAD[2] + 3.6]);
+  out.push(S(G.disc(0, 1.1, 11, hat, P), { tone: "hi" }));
+  out.push(S(G.solidOf([[1.1, 0], [1.1, 9.2], [3.4, 8.9, 1], [6.4, 7.4, 1], [8.8, 4.5, 1], [10, 0]], hat, P), { tone: "hi", crease: "lo", inner: L(G.arcOf(hat, 4, 8.7, P), { tone: "mid" }) }));
   return out.join("");
 }
 
@@ -302,16 +315,16 @@ function handsAt(p) {
   else if (p < 0.38) { const q = e((p - 0.3) / 0.08); x = OPX - 4; z = 70 - q * 7.4; }
   else if (p < 0.78) { const q = e((p - 0.38) / 0.4); x = OPX - 4 + q * 34; z = 62.6; }
   else { const q = e((p - 0.78) / 0.22); x = OPX + 30; z = 62.6 + q * 7.4; }
-  return { right: [x + 12, 4, z], left: [OPX - 22, 2 + Math.sin(p * Math.PI * 2) * 1.2, 52] };
+  return { right: [x + 16, 6, z], left: [OPX - 15, -1 + Math.sin(p * Math.PI * 2) * 0.8, 50.5] };
 }
 function armsAt(p) {
   const h = handsAt(p);
-  const sR = [OPX + 12.5, OPY + 2, SHZ], sL = [OPX - 12.5, OPY + 2, SHZ];
+  const sR = [OPX + 12.8, OPY + 0.4, SHZ], sL = [OPX - 12.8, OPY + 0.4, SHZ];
   return { sR, sL, eR: elbowOf(sR, h.right, 1), eL: elbowOf(sL, h.left, -1), hR: h.right, hL: h.left };
 }
 function armsSvg(p, P) {
   const a = armsAt(p);
-  const one = (s, e, h) => T.tubePieces(G.fillet([s, e, h], 8, 7), 4.4, P, { maxLength: 80, caps: [false, false] }).map((piece) => T.tubeSvg(piece, { tone: "hi" })).join("") + solidSvg(G.sphereOf(h, 4.8, P), { tone: "hi" });
+  const one = (s, e, h) => T.tubePieces(G.fillet([s, e, h], 8, 7), (t) => 5 - 1.4 * Math.max(0, t - 0.4) / 0.6, P, { maxLength: 80, caps: [false, false] }).map((piece) => T.tubeSvg(piece, { tone: "hi" })).join("") + solidSvg(G.sphereOf(h, 4.4, P), { tone: "mid" });
   return one(a.sL, a.eL, a.hL) + one(a.sR, a.eR, a.hR);
 }
 `;
