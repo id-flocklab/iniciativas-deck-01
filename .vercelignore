@@ -7,3 +7,9 @@ compare.py
 build.mjs
 serve.mjs
 video/render.mjs
+anatomy/kit/
+anatomy/scripts/
+anatomy/shots/
+anatomy/bundle.mjs
+anatomy/*/build.mjs
+anatomy/*/model.mjs

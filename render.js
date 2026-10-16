@@ -119,6 +119,16 @@ const T = {
       <div class="choice no"><div class="choice-i">✕</div><div><div class="choice-t">${rich(s.noLabel || 'No avanzamos')}</div><div class="choice-d">${rich(s.no)}</div></div></div>
     </div>`),
 
+  // Figura isométrica animada (Anatomy) con el texto a la izquierda, como en el deck de Ford.
+  figure: (s) => `
+    <div class="fig-text">
+      <div class="kicker">${rich(s.kicker)}</div>
+      <div class="fig-title">${rich(s.title)}</div>
+      <p class="fig-p">${rich(s.text)}</p>
+    </div>
+    <iframe class="fig-frame" src="${s.src}?embed&accent=${s.accent}${document.body.classList.contains('print') ? '&still' : ''}" title="${esc(s.label || '')}" loading="eager" scrolling="no"></iframe>
+    <div class="sep"></div>`,
+
   // Video explicativo a pantalla completa. En el PDF se muestra el cuadro final (poster).
   video: (s) => document.body.classList.contains('print')
     ? `<img class="vid" src="assets/video/${s.src}-poster.jpg" alt="">`

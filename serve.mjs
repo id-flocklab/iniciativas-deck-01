@@ -37,7 +37,7 @@ createServer(async (req, res) => {
   try {
     if (!(await stat(file)).isFile()) throw 0;
     let body = await readFile(file);
-    if (extname(file) === '.html') body = body.toString().replace('</body>', RELOAD + '</body>');
+    if (extname(file) === '.html') { const html = body.toString(); const i = html.lastIndexOf('</body>'); body = i < 0 ? html + RELOAD : html.slice(0, i) + RELOAD + html.slice(i); }
     const type = TYPES[extname(file)] || 'application/octet-stream';
     // Range requests: los navegadores los usan para reproducir video
     const range = /bytes=(\d*)-(\d*)/.exec(req.headers.range || '');

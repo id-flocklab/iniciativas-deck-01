@@ -1,7 +1,7 @@
 // Contenido del deck. Cada slide = { type, theme, ...datos }.
 // Texto entre *asteriscos* = Newsreader Light Italic (el acento en cursiva).
 // themes: deck (violeta) · i1 (magenta) · i2 (naranja) · i3 (verde)
-// types: cover · section · video · decision · list · cards · steps · clients · quote · gantt · closing
+// types: cover · section · figure · video · decision · list · cards · steps · clients · quote · gantt · closing
 // video: { src: 'cv' } → reproduce out/video/cv.mp4 al entrar a la slide (en el PDF va el cuadro final)
 
 const I1 = 'INICIATIVA 01 · MEDIMOS TIEMPOS DE CICLO DE TAREAS REPETITIVAS CON COMPUTER VISION';
@@ -37,7 +37,13 @@ window.SLIDES = [
     foot: 'COMPUTER VISION · AUTOMATIZACIÓN · MEDICIÓN DE TIEMPOS',
     status: 'En implementación',
   },
-  { type: 'video', theme: 'i1', src: 'cv' },
+  {
+    type: 'figure', theme: 'i1', src: 'anatomy/cv/cv.html', accent: 'ec00ff',
+    label: 'Estación de trabajo con cámara: medición automática de ciclos',
+    kicker: 'INICIATIVA 01 · COMPUTER VISION',
+    title: 'Medimos cada ciclo, *automáticamente*',
+    text: 'Con las cámaras que ya existen en planta, medimos cuánto dura cada tarea repetitiva, sin intervenir al operario.',
+  },
   {
     type: 'quote', theme: 'i1',
     kicker: I1,

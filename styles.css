@@ -166,6 +166,13 @@ body.print .frame .num { display: none; }
 .choice-t { font: 500 56px/60px Poppins; letter-spacing: -.03em; }
 .choice-d { margin-top: 12px; font: 400 24px/30px Poppins; color: var(--muted); }
 
+/* ---------- Figura isométrica ---------- */
+.fig-text { position: absolute; left: 60px; top: 0; width: 600px; height: 1064px; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+.fig-title { font: 500 72px/76px Poppins; letter-spacing: -.03em; }
+.fig-title .it { font-size: 80px; line-height: 0; }
+.fig-p { font: 400 30px/40px Poppins; color: var(--muted); }
+.fig-frame { position: absolute; left: 680px; top: 70px; width: 1180px; height: 960px; border: 0; background: #000; }
+
 /* ---------- Video ---------- */
 .vid { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; object-fit: cover; background: #000; }
 /* La franja inferior viene dibujada en el video: se recorta y se usa la de la slide (pegada al borde de la pantalla) */
