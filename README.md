@@ -16,9 +16,10 @@ npm run video:cv   # out/video/cv.mp4 (también video:vr y video:ra)
 ## Cómo editar
 
 - **Contenido:** todo está en [`slides.js`](slides.js). Cada slide es un objeto con `type`, `theme` y sus textos. El texto entre `*asteriscos*` sale en Newsreader itálica (el acento del diseño).
-- **Tipos de slide:** `cover`, `section`, `list`, `cards`, `steps`, `clients`, `quote`, `gantt`, `closing` — definidos en [`render.js`](render.js).
+- **Tipos de slide:** `cover`, `section`, `figure`, `decision`, `list`, `cards`, `steps`, `clients`, `quote`, `gantt`, `closing` — definidos en [`render.js`](render.js).
 - **Estilos:** [`styles.css`](styles.css), con las medidas tomadas del Figma original. Temas por iniciativa: `deck` (violeta), `i1` (magenta), `i2` (naranja), `i3` (verde).
-- **Videos:** `video/cv.html`, `video/vr.html`, `video/ra.html` (base compartida en `video/common.*`). Se pueden ver en el navegador en `/video/<nombre>.html`.
+- **Figuras isométricas:** `anatomy/cv`, `anatomy/vr` y `anatomy/ra` (kit de Anatomy en `anatomy/kit`, MIT). Se regeneran con `node anatomy/<nombre>/build.mjs` y se embeben en las slides de tipo `figure`. `node anatomy/scripts/lines.mjs anatomy/<nombre>/<nombre>.html` verifica que ninguna línea quede suelta.
+- **Videos (versión anterior):** `video/cv.html`, `video/vr.html`, `video/ra.html` (base compartida en `video/common.*`). Se pueden ver en el navegador en `/video/<nombre>.html`.
 
 ## Publicación (Vercel)
 

@@ -158,7 +158,13 @@ window.SLIDES = [
     foot: 'EXPERIENCIAS INMERSIVAS · PRODUCTO · UNREAL ENGINE',
     status: 'En POC y demos',
   },
-  { type: 'video', theme: 'i2', src: 'vr' },
+  {
+    type: 'figure', theme: 'i2', src: 'anatomy/vr/vr.html', accent: 'f77229',
+    label: 'Mesa de maqueta: la IA genera una planta industrial para practicar en VR',
+    kicker: 'INICIATIVA 02 · VR CON IA GENERATIVA',
+    title: 'Escenarios de VR, *en semanas*',
+    text: 'A partir de un procedimiento escrito, la IA genera el escenario 3D y lo deja listo para practicar en VR, en semanas en vez de meses.',
+  },
   {
     type: 'quote', theme: 'i2',
     kicker: I2,
@@ -275,7 +281,13 @@ window.SLIDES = [
     foot: 'AGENTES · PRODUCTO',
     status: 'En demo con lentes de RA',
   },
-  { type: 'video', theme: 'i3', src: 'ra' },
+  {
+    type: 'figure', theme: 'i3', src: 'anatomy/ra/ra.html', accent: 'affc5a',
+    label: 'Estación de válvula: el experto trabaja con gafas de RA y la IA arma el curso',
+    kicker: 'INICIATIVA 03 · CAPACITACIÓN DESDE EL TRABAJO REAL',
+    title: 'Del trabajo real *a un curso*',
+    text: 'El experto trabaja con gafas de RA y las manos libres, y la IA convierte lo que hace y dice en un curso que él mismo valida.',
+  },
   {
     type: 'quote', theme: 'i3',
     kicker: I3,
