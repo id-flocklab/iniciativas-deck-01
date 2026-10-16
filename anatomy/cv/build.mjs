@@ -230,9 +230,11 @@ function rack() {
 
 // ── Operario (cuerpo estático detrás de la cinta) ──
 const HEAD = [OP[0], OP[1], 99.5];
-function operator() {
+function operator(part) {
   const out = [];
+  const lower = part === "lower";
   const [x, y] = OP;
+  if (lower) {
   out.push(`<path class="iso-halo" d="${k.haloOf({ x: x - 16, y: y - 10, w: 32, d: 24, r: 10 }, 0, 0.1, P)}" style="filter:blur(3px)"/>`);
   // botines con puntera y piernas del pantalón
   for (const dx of [-5.2, 5.2]) {
@@ -240,9 +242,12 @@ function operator() {
     const leg = { x: x + dx - 4.5, y: y - 4.6, w: 9, d: 9.4, r: 4.3 };
     out.push(S(k.slabOf(leg, 4.6, 40, P, 6), { tone: "lo", crease: "none", inner: L(k.sideSeam(leg, 25, P, 6), { tone: "faint" }) }));
   }
-  // cadera con cinturón, abdomen y pecho con chaleco reflectivo
+  // cadera con cinturón
   const hips = { x: x - 11, y: y - 6, w: 22, d: 12.5, r: 5.6 };
   out.push(S(k.slabOf(hips, 42, 11, P, 6), { tone: "lo", inner: L(k.sideSeam(hips, 50.5, P, 6), { tone: "mid" }) }));
+  return out.join("");
+  }
+  // abdomen y pecho con chaleco reflectivo
   const belly = { x: x - 11.6, y: y - 6.6, w: 23.2, d: 13.6, r: 6.2 };
   out.push(S(k.slabOf(belly, 53, 13, P, 6), { tone: "hi", crease: "lo", inner: L(k.sideSeam(belly, 59, P, 6), { tone: "mid" }) }));
   const chest = { x: x - 14.5, y: y - 7.6, w: 29, d: 15.6, r: 7.4 };
@@ -315,17 +320,17 @@ function handsAt(p) {
   else if (p < 0.38) { const q = e((p - 0.3) / 0.08); x = OPX - 4; z = 70 - q * 7.4; }
   else if (p < 0.78) { const q = e((p - 0.38) / 0.4); x = OPX - 4 + q * 34; z = 62.6; }
   else { const q = e((p - 0.78) / 0.22); x = OPX + 30; z = 62.6 + q * 7.4; }
-  return { right: [x + 16, 6, z], left: [OPX - 15, -1 + Math.sin(p * Math.PI * 2) * 0.8, 50.5] };
+  return { right: [x + 16, 6, z], left: [OPX - 16, -9 + Math.sin(p * Math.PI * 2) * 0.6, 50.4] };
 }
 function armsAt(p) {
   const h = handsAt(p);
   const sR = [OPX + 12.8, OPY + 0.4, SHZ], sL = [OPX - 12.8, OPY + 0.4, SHZ];
   return { sR, sL, eR: elbowOf(sR, h.right, 1), eL: elbowOf(sL, h.left, -1), hR: h.right, hL: h.left };
 }
-function armsSvg(p, P) {
+function armsSvg(p, P, side) {
   const a = armsAt(p);
   const one = (s, e, h) => T.tubePieces(G.fillet([s, e, h], 8, 7), (t) => 5 - 1.4 * Math.max(0, t - 0.4) / 0.6, P, { maxLength: 80, caps: [false, false] }).map((piece) => T.tubeSvg(piece, { tone: "hi" })).join("") + solidSvg(G.sphereOf(h, 4.4, P), { tone: "mid" });
-  return one(a.sL, a.eL, a.hL) + one(a.sR, a.eR, a.hR);
+  return side === "left" ? one(a.sL, a.eL, a.hL) : one(a.sR, a.eR, a.hR);
 }
 `;
 const ARMS_FN = new Function("T", "G", "solidSvg", ARMS + "return { armsAt, armsSvg };")({ tubePieces, tubeSvg }, G, k.solidSvg);
@@ -341,11 +346,13 @@ const svg = k.figureSvg({
     pallet(),
     post(),
     cable((p) => p.mid[2] > 3 && p.mid[1] < POST[1] + 14),
-    operator(),
+    operator("lower"),
     conveyorBack(),
     cleats(),
+    `<g data-part="arm-left">${ARMS_FN.armsSvg(0.5, P, "left")}</g>`,
+    operator("upper"),
     `<g data-part="boxes">${[0, 1, 2, 3].map((i) => `<g data-part="box" transform="${k.translateAlong(P, [-150 + i * SPACING, 0, 0])}">${box()}</g>`).join("")}</g>`,
-    `<g data-part="arms">${ARMS_FN.armsSvg(0.5, P)}</g>`,
+    `<g data-part="arm-right">${ARMS_FN.armsSvg(0.5, P, "right")}</g>`,
     `<g data-part="pose" class="cv-pose"></g>`,
     conveyorFront(),
     cable((p) => !(p.mid[2] > 3 && p.mid[1] < POST[1] + 14)),
@@ -366,7 +373,7 @@ const root = document.querySelector(".iso-stage");
 const svg = root.querySelector("svg");
 const $ = (sel) => svg.querySelector(sel);
 const boxes = [...svg.querySelectorAll('[data-part="box"]')];
-const cleatEls = [...svg.querySelectorAll('[data-part="cleat"]')], arms = $('[data-part="arms"]'), pose = $('[data-part="pose"]');
+const cleatEls = [...svg.querySelectorAll('[data-part="cleat"]')], armL = $('[data-part="arm-left"]'), armR = $('[data-part="arm-right"]'), pose = $('[data-part="pose"]');
 const digits = $('[data-part="digits"]'), bars = [...svg.querySelectorAll('[data-part="bar"]')];
 const leds = [$('[data-part="led"]'), $('[data-part="led2"]')];
 const readout = document.querySelector("[data-readout]");
@@ -398,7 +405,8 @@ function draw() {
     c.setAttribute("transform", translateAlong(P, [x, 0, 0]));
     c.style.opacity = fade.toFixed(3);
   });
-  arms.innerHTML = armsSvg(p, P);
+  armL.innerHTML = armsSvg(p, P, "left");
+  armR.innerHTML = armsSvg(p, P, "right");
   // detección: puntos en las articulaciones visibles
   const a = armsAt(p);
   const on = phase >= 1;
